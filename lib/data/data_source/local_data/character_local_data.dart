@@ -13,9 +13,9 @@ class CharacterLocalData implements CharacterRepository {
   @override
   Future<Either<FailureModel, List<CharacterModel>>> getCharacterList({
     int page = 1,
-    String? filterName,
+    String? filterString,
     String? filterStatus,
-    String? filterSpecies,
+    String? filterStringType,
   }) async {
     try {
       List<CharacterModel> rta = [];

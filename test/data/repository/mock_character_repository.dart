@@ -7,9 +7,9 @@ class MockCharacterRepository implements CharacterRepository {
   @override
   Future<Either<FailureModel, List<CharacterModel>>> getCharacterList({
     int page = 1,
-    String? filterName,
+    String? filterString,
     String? filterStatus,
-    String? filterSpecies,
+    String? filterStringType,
   }) async {
     CharacterModel data = const CharacterModel(
       id: '1',

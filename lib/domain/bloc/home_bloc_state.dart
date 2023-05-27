@@ -9,8 +9,8 @@ class HomeBlocState extends Equatable {
 
   final int page;
   final String? filterString;
+  final String? filterStringType;
   final String? filterStatus;
-  final String? filterSpecies;
 
   const HomeBlocState({
     this.requestStatus = RequestStatus.none,
@@ -20,7 +20,7 @@ class HomeBlocState extends Equatable {
     this.errorMessage,
     this.filterString,
     this.filterStatus,
-    this.filterSpecies,
+    this.filterStringType,
   });
 
   factory HomeBlocState.initial() {
@@ -39,9 +39,9 @@ class HomeBlocState extends Equatable {
         listViewData,
         page,
         errorMessage,
-        filterString,
         filterStatus,
-        filterSpecies,
+        filterString,
+        filterStringType,
       ];
 
   HomeBlocState copyWith({
@@ -50,9 +50,9 @@ class HomeBlocState extends Equatable {
     List<ListViewModel>? listViewData,
     int? page,
     String? errorMessage,
-    String? filterName,
+    String? filterString,
     String? filterStatus,
-    String? filterSpecies,
+    String? filterStringType,
   }) {
     print('copyWith.filterStatus.ants=>$filterStatus');
 
@@ -62,9 +62,9 @@ class HomeBlocState extends Equatable {
       page: page ?? this.page,
       listViewData: listViewData ?? this.listViewData,
       errorMessage: errorMessage ?? this.errorMessage,
-      filterString: filterName ?? this.filterString,
       filterStatus: filterStatus ?? this.filterStatus,
-      filterSpecies: filterSpecies ?? this.filterSpecies,
+      filterString: filterString ?? this.filterString,
+      filterStringType: filterStringType ?? this.filterStringType,
     );
     print('copyWith.filterStatus.dsps=>${l.filterStatus}');
 

@@ -30,13 +30,13 @@ class HomeBlocHttpSuccessEvent extends HomeBlocEvent {
 }
 
 class HomeBlocChangeFilterEvent extends HomeBlocEvent {
-  final String? filterName;
-  final String? filterSpecies;
+  final String? filterString;
+  final String? filterStringType;
   final String? filterStatus;
 
   const HomeBlocChangeFilterEvent({
-    required this.filterName,
-    required this.filterSpecies,
+    required this.filterString,
+    required this.filterStringType,
     required this.filterStatus,
   });
 }

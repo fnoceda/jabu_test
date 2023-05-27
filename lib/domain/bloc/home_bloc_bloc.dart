@@ -64,9 +64,9 @@ class HomeBlocBloc extends Bloc<HomeBlocEvent, HomeBlocState> {
       // print('ants=>$state');
       emit(state.copyWith(
         page: 1,
-        filterName: event.filterName ?? state.filterString,
+        filterString: event.filterString ?? state.filterString,
         filterStatus: event.filterStatus ?? state.filterStatus,
-        filterSpecies: event.filterSpecies ?? state.filterSpecies,
+        filterStringType: event.filterStringType ?? state.filterStringType,
       ));
       print(
           'HomeBlocChangeFilterEvent.finish.filterStatus=>${state.filterStatus}');
@@ -81,25 +81,35 @@ class HomeBlocBloc extends Bloc<HomeBlocEvent, HomeBlocState> {
   }
 
   changeFilters({
-    String? filterName,
+    String? filterString,
     String? filterStatus,
-    String? filterSpecies,
+    String? filterStringType,
   }) async {
     print(
-        'changeFilters.param.filterStatus=>$filterStatus filterName=> $filterName filterSpecies=> $filterSpecies');
+        'changeFilters.param.filterStatus=>$filterStatus filterName=> $filterString filterSpecies=> $filterStringType');
     print(
-        'changeFilters.state.filterStatus=>${state.filterStatus} filterName=> ${state.filterString} filterSpecies=>${state.filterSpecies}');
-
+        'changeFilters.state.filterStatus=>${state.filterStatus} filterName=> ${state.filterString} filterSpecies=>${state.filterStringType}');
+    // kaka
     add(HomeBlocChangeFilterEvent(
-      filterName: filterName,
+      filterString: filterString,
       filterStatus: filterStatus,
-      filterSpecies: filterSpecies,
+      filterStringType: filterStringType,
     ));
-    await getNewData(
-      filterName: filterName ?? state.filterString,
-      filterStatus: filterStatus ?? state.filterStatus,
-      filterSpecies: filterSpecies ?? state.filterSpecies,
-    );
+
+    filterString = filterString ?? state.filterString;
+    filterStatus = filterStatus ?? state.filterStatus;
+    filterStringType = filterStringType ?? state.filterStringType;
+
+    bool searchCond = filterString != null && filterStringType != null ||
+        filterStatus != null;
+
+    if (searchCond) {
+      await getNewData(
+        filterString: filterString ?? state.filterString,
+        filterStatus: filterStatus ?? state.filterStatus,
+        filterStringType: filterStringType ?? state.filterStringType,
+      );
+    }
 
     // print('changeFilters.state.filterName=> ${state.filterName}');
     // print('changeFilters.state.filterStatus=> ${state.filterStatus}');
@@ -107,17 +117,17 @@ class HomeBlocBloc extends Bloc<HomeBlocEvent, HomeBlocState> {
   }
 
   Future<void> getNewData({
-    String? filterName,
+    String? filterString,
     String? filterStatus,
-    String? filterSpecies,
+    String? filterStringType,
   }) async {
     add(const HomeBlocHttpLoadingEvent());
     // print('getNewData.param.filterStatus=>${filterStatus}');
     await getData(
       page: 1,
       filterStatus: filterStatus,
-      filterName: filterName,
-      filterSpecies: filterSpecies,
+      filterString: filterString,
+      filterStringType: filterStringType,
     );
   }
 
@@ -130,8 +140,8 @@ class HomeBlocBloc extends Bloc<HomeBlocEvent, HomeBlocState> {
     rta = await getData(
       page: state.page,
       filterStatus: state.filterStatus,
-      filterName: state.filterString,
-      filterSpecies: state.filterSpecies,
+      filterString: state.filterString,
+      filterStringType: state.filterStringType,
     );
     return rta;
   }
@@ -139,15 +149,15 @@ class HomeBlocBloc extends Bloc<HomeBlocEvent, HomeBlocState> {
   Future<List<ListViewModel>> getData({
     required int page,
     String? filterStatus,
-    String? filterName,
-    String? filterSpecies,
+    String? filterString,
+    String? filterStringType,
   }) async {
     List<ListViewModel> rta = [];
 
     var result = await repo.getCharacterList(
       filterStatus: filterStatus,
-      filterName: filterName,
-      filterSpecies: filterSpecies,
+      filterString: filterString,
+      filterStringType: filterStringType,
     );
     rta = result.fold((l) {
       add(HomeBlocHttpFailEvent(errorMessage: l.message));

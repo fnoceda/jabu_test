@@ -51,13 +51,15 @@ class _HomePageState extends State<HomePage> {
                 onChange: (String type) {
                   context
                       .read<HomeBlocBloc>()
-                      .changeFilters(filterSpecies: type);
+                      .changeFilters(filterStringType: type);
                 },
               ),
               SearchInput(
                 searchController: searchController,
                 onChange: (String text) {
-                  context.read<HomeBlocBloc>().changeFilters(filterName: text);
+                  context
+                      .read<HomeBlocBloc>()
+                      .changeFilters(filterString: text);
                 },
               ),
               const SizedBox(height: 20),

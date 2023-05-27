@@ -14,28 +14,31 @@ class CharacterRemoteService {
   List<dynamic> result = [];
   Future<Either<FailureModel, SuccessModel>> getCharacterList({
     int page = 1,
-    String? filterName,
+    String? filterString,
     String? filterStatus,
-    String? filterSpecies,
+    String? filterStringType,
   }) async {
     String filters = "";
-    if (filterName != null && filterName.trim() != "") {
-      filters += 'name: "$filterName"';
+
+    if (filterString != null && filterString.trim() != '') {
+      if (filterStringType != null && filterStringType.trim() == "species") {
+        filters += 'species: "$filterString"';
+      } else {
+        if (filterStringType != null && filterStringType.trim() == "name") {
+          filters += 'name: "$filterString"';
+        }
+      }
     }
 
     if (filterStatus != null &&
-        filterStatus.trim() != "" &&
+        filterStatus.trim() != '' &&
         filterStatus.trim() != "all") {
       filters += 'status: "$filterStatus"';
     }
 
-    if (filterSpecies != null && filterSpecies.trim() != "") {
-      filters += 'species: "$filterSpecies"';
-    }
-
     print('CharacterRemoteService.filterStatus=> $filterStatus');
     // print('CharacterRemoteService.filterSpecies=> $filterSpecies');
-    print('CharacterRemoteService.filterName=> $filterName');
+    print('CharacterRemoteService.filterName=> $filterString');
 
     String query = """
                               query {
@@ -51,7 +54,7 @@ class CharacterRemoteService {
                               }
                               """;
 
-    // print(query);
+    print(query);
 
     QueryResult<dynamic> result = await graphQLClient.query(
       QueryOptions(

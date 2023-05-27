@@ -14,17 +14,17 @@ class CharacterRemoteData implements CharacterRepository {
   @override
   Future<Either<FailureModel, List<CharacterModel>>> getCharacterList({
     int page = 1,
-    String? filterName,
+    String? filterString,
     String? filterStatus,
-    String? filterSpecies,
+    String? filterStringType,
   }) async {
     Either<FailureModel, List<CharacterModel>> rta;
     try {
       var result = await characterRemoteService.getCharacterList(
         page: page,
-        filterName: filterName,
+        filterString: filterString,
         filterStatus: filterStatus,
-        filterSpecies: filterSpecies,
+        filterStringType: filterStringType,
       );
 
       rta = result.fold((l) => Left(l), (r) {

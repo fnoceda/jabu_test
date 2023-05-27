@@ -14,9 +14,9 @@ class CharacterRepository implements ICharacterRepository {
   @override
   Future<Either<FailureModel, List<CharacterModel>>> getCharacterList({
     int page = 1,
-    String? filterName,
+    String? filterString,
     String? filterStatus,
-    String? filterSpecies,
+    String? filterStringType,
   }) {
     throw UnimplementedError();
   }
@@ -36,39 +36,19 @@ class CharacterDatsources implements CharacterRepository {
   @override
   Future<Either<FailureModel, List<CharacterModel>>> getCharacterList({
     int page = 1,
-    String? filterName,
+    String? filterString,
     String? filterStatus,
-    String? filterSpecies,
+    String? filterStringType,
   }) async {
     bool hasInternet = await checkInternetService.checkInternet();
     if (hasInternet) {
       return await characterRemoteData.getCharacterList(
         page: page,
-        filterName: filterName,
+        filterString: filterString,
         filterStatus: filterStatus,
-        filterSpecies: filterSpecies,
+        filterStringType: filterStringType,
       );
     }
     return const Left(FailureModel(status: 500, message: 'Unimplemented'));
   }
 }
-
-// class CharacterRepository implements ICharacterRepository {
-//   final CheckInternetService checkInternetService;
-//   final CharacterRemoteService characterRemoteService;
-//   final CharacterLocalData characterLocalService;
-
-//   CharacterRepository({
-//     required this.checkInternetService,
-//     required this.characterRemoteService,
-//     required this.characterLocalService,
-//   });
-//   @override
-//   Future<Either<FailureModel, List<CharacterModel>>> getCharacterList() async {
-//     final bool checkInternet = await checkInternetService.checkInternet();
-//     CharacterRepository repo =
-//         (checkInternet) ? characterRemoteService : characterLocalService;
-
-//     return await repo.getCharacterList();
-//   }
-// }
