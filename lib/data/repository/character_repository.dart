@@ -23,8 +23,8 @@ class CharacterRepository implements ICharacterRepository {
 }
 
 class CharacterDatsources implements CharacterRepository {
-  final CharacterRemoteData characterRemoteData;
   final CheckInternetService checkInternetService;
+  final CharacterRemoteData characterRemoteData;
   final CharacterLocalData characterLocalData;
 
   CharacterDatsources({
@@ -42,12 +42,16 @@ class CharacterDatsources implements CharacterRepository {
   }) async {
     bool hasInternet = await checkInternetService.checkInternet();
     if (hasInternet) {
-      return await characterRemoteData.getCharacterList(
+      var data = await characterRemoteData.getCharacterList(
         page: page,
         filterString: filterString,
         filterStatus: filterStatus,
         filterStringType: filterStringType,
       );
+
+      // aqui guardar
+
+      return data;
     }
     return const Left(FailureModel(status: 500, message: 'Unimplemented'));
   }

@@ -26,4 +26,8 @@ class CharacterLocalData implements CharacterRepository {
       return const Left(FailureModel(status: 500, message: 'No timplemented'));
     }
   }
+
+  void saveData(List<CharacterModel> data) async {
+    data.forEach((element) {});
+  }
 }

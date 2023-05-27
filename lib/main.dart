@@ -8,7 +8,7 @@ import 'locator.dart';
 
 void main() async {
   await initHiveForFlutter();
-  Locator.setUpLocators();
+  await Locator.setUpLocators();
   EquatableConfig.stringify = kDebugMode;
 
   WidgetsFlutterBinding.ensureInitialized();
