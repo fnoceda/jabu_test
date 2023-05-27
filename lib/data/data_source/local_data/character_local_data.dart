@@ -6,20 +6,22 @@ import '../../models/failure_model.dart';
 import '../../repository/character_repository.dart';
 import '../../services/character_local_service.dart';
 
-class CharacterLocalData implements CharacterRepository {
+class CharacterLocalData implements ICharacterLocalRepository {
   final CharacterLocalService characterLocalService;
 
   CharacterLocalData({required this.characterLocalService});
   @override
   Future<Either<FailureModel, List<CharacterModel>>> getCharacterList({
-    int page = 1,
     String? filterString,
     String? filterStatus,
     String? filterStringType,
   }) async {
     try {
-      List<CharacterModel> rta = [];
-      return Right(rta);
+      return await characterLocalService.getCharacterList(
+        filterString: filterString,
+        filterStatus: filterStatus,
+        filterStringType: filterStringType,
+      );
     } catch (e, s) {
       if (kDebugMode) print(e);
       if (kDebugMode) print(s);
@@ -27,7 +29,8 @@ class CharacterLocalData implements CharacterRepository {
     }
   }
 
-  void saveData(List<CharacterModel> data) async {
-    data.forEach((element) {});
+  @override
+  Future<void> save({required List<CharacterModel> data}) async {
+    await characterLocalService.save(data: data);
   }
 }

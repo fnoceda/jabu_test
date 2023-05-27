@@ -6,7 +6,7 @@ class CharacterCollection {
   @Index(replace: true)
   Id? id;
 
-  @Index(unique: true)
+  @Index()
   late String name;
 
   @Index()
