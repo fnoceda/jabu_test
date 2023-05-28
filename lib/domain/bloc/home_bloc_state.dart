@@ -20,7 +20,7 @@ class HomeBlocState extends Equatable {
     this.errorMessage,
     this.filterString,
     this.filterStatus,
-    this.filterStringType,
+    this.filterStringType = 'name',
   });
 
   factory HomeBlocState.initial() {

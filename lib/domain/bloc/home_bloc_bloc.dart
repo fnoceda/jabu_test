@@ -98,15 +98,16 @@ class HomeBlocBloc extends Bloc<HomeBlocEvent, HomeBlocState> {
         filterStatus != null;
 
     if (searchCond) {
+      print('HomeBloc.searchData=> $searchCond');
+
       await getNewData(
         filterString: filterString ?? state.filterString,
         filterStatus: filterStatus ?? state.filterStatus,
         filterStringType: filterStringType ?? state.filterStringType,
       );
+    } else {
+      print('HomeBloc.searchCond=> $searchCond');
     }
-    // else {
-    //   print('HomeBloc.searchCond=> $searchCond');
-    // }
 
     // print('changeFilters.state.filterName=> ${state.filterName}');
     // print('changeFilters.state.filterStatus=> ${state.filterStatus}');

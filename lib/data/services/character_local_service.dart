@@ -60,7 +60,7 @@ class CharacterLocalService implements ICharacterLocalRepository {
           .optional(filterByStatus, (q) {
             print("'$filterStatus'");
             // alive alive
-            return q.statusContains(filterStatus!.trim());
+            return q.statusEqualTo(filterStatus!.trim());
           })
           .optional(filterByName, (q) {
             print('filterByName => $filterString');
