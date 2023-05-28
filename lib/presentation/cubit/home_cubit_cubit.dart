@@ -15,8 +15,4 @@ class HomeCubitCubit extends Cubit<HomeCubitState> {
   void changeSearchType(SearchType type) {
     emit(state.copyWith(searchType: type));
   }
-
-  Future<void> changeLoadingMoreData({required bool loading}) async {
-    emit(state.copyWith(loadingMoreData: loading));
-  }
 }

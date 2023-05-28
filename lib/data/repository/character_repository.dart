@@ -12,13 +12,18 @@ abstract class ICharacterRemoteRepository {
 }
 
 abstract class ICharacterLocalRepository {
-  Future<Either<FailureModel, List<CharacterModel>>> getCharacterList();
+  Future<Either<FailureModel, List<CharacterModel>>> getCharacterList({
+    required int page,
+    String? filterString,
+    String? filterStatus,
+    String? filterStringType,
+  });
   Future<void> save({required List<CharacterModel> data});
 }
 
 abstract class CharacterRepository {
   Future<Either<FailureModel, List<CharacterModel>>> getCharacterList({
-    int page = 1,
+    required int page,
     String? filterString,
     String? filterStatus,
     String? filterStringType,
@@ -38,12 +43,13 @@ class CharacterDatsources implements CharacterRepository {
 
   @override
   Future<Either<FailureModel, List<CharacterModel>>> getCharacterList({
-    int page = 1,
+    required int page,
     String? filterString,
     String? filterStatus,
     String? filterStringType,
   }) async {
     try {
+      print('CharacterDatsources.page=> $page');
       bool hasInternet = await checkInternetService.checkInternet();
       Either<FailureModel, List<CharacterModel>> result;
       if (hasInternet) {

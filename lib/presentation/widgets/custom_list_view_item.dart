@@ -12,6 +12,7 @@ class CustomListItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // print('${item.title} => ${item.status.toLowerCase()}');
     return ListTile(
       leading: CircleAvatar(
         backgroundColor: Colors.yellow,

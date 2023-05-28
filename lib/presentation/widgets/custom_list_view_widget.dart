@@ -1,7 +1,5 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:jabu_test_bloc/presentation/cubit/home_cubit_cubit.dart';
 
 import '../models/list_view_model.dart';
 import 'custom_list_view_item.dart';
@@ -20,8 +18,7 @@ class CustomListView extends StatefulWidget {
 class _CustomListViewState extends State<CustomListView> {
   ScrollController scrollController = ScrollController();
   late List<ListViewModel> data;
-  bool visible = false;
-  late HomeCubitCubit cubit;
+  var loadingMoreData = false;
 
   @override
   void initState() {
@@ -30,25 +27,33 @@ class _CustomListViewState extends State<CustomListView> {
     if (widget.loadMoreData != null) {
       scrollController.addListener(_scrollListener);
     }
-    cubit = context.read<HomeCubitCubit>();
   }
 
-  void _scrollListener() {
+  _scrollListener() {
     scrollController.addListener(() async {
-      var nextPageTrigger = 0.8 * scrollController.position.maxScrollExtent;
-      if (scrollController.position.pixels > nextPageTrigger) {
-        if (!cubit.state.loadingMoreData) {
-          cubit.changeLoadingMoreData(loading: true);
+      var nextPageTrigger =
+          0.8 * scrollController.position.maxScrollExtent - 10;
+      var position = scrollController.position.pixels;
+      if (position > nextPageTrigger) {
+        if (!loadingMoreData) {
+          loadingMoreData = true;
           List<ListViewModel> result = await widget.loadMoreData!();
           data.addAll(result);
-          cubit.changeLoadingMoreData(loading: false);
+          loadingMoreData = false;
         }
       }
     });
   }
 
   @override
+  void dispose() {
+    scrollController.removeListener(_scrollListener);
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
+    print('rebuild CustomListView');
     Size size = MediaQuery.of(context).size;
     return Column(
       children: [
@@ -66,7 +71,7 @@ class _CustomListViewState extends State<CustomListView> {
           ),
         ),
         Visibility(
-          visible: context.watch<HomeCubitCubit>().state.loadingMoreData,
+          visible: loadingMoreData,
           child: Container(
             color: Colors.white,
             width: size.width * 0.9,

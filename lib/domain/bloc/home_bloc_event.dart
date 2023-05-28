@@ -22,11 +22,15 @@ class HomeBlocHttpLoadingMoreEvent extends HomeBlocEvent {
 }
 
 class HomeBlocHttpSuccessEvent extends HomeBlocEvent {
+  final int page;
   final List<CharacterModel> characters;
   final List<ListViewModel> viewNewData;
 
-  const HomeBlocHttpSuccessEvent(
-      {required this.characters, required this.viewNewData});
+  const HomeBlocHttpSuccessEvent({
+    required this.characters,
+    required this.viewNewData,
+    required this.page,
+  });
 }
 
 class HomeBlocChangeFilterEvent extends HomeBlocEvent {

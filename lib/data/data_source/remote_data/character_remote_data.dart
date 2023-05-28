@@ -13,7 +13,7 @@ class CharacterRemoteData implements CharacterRepository {
 
   @override
   Future<Either<FailureModel, List<CharacterModel>>> getCharacterList({
-    int page = 1,
+    required int page,
     String? filterString,
     String? filterStatus,
     String? filterStringType,

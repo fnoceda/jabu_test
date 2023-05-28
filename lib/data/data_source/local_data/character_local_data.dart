@@ -12,12 +12,13 @@ class CharacterLocalData implements ICharacterLocalRepository {
   CharacterLocalData({required this.characterLocalService});
   @override
   Future<Either<FailureModel, List<CharacterModel>>> getCharacterList({
-    int page = 1,
+    required int page,
     String? filterString,
     String? filterStatus,
     String? filterStringType,
   }) async {
     try {
+      print('CharacterLocalData.page = $page');
       return await characterLocalService.getCharacterList(
         page: page,
         filterString: filterString,

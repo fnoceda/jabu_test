@@ -19,6 +19,7 @@ class _HomePageState extends State<HomePage> {
   final TextEditingController searchController = TextEditingController();
 
   Future<List<ListViewModel>> _getMoreData() async {
+    print('call to _getMoreData');
     var result = context.read<HomeBlocBloc>().getMoreData();
     return result;
   }
@@ -69,13 +70,18 @@ class _HomePageState extends State<HomePage> {
                   switch (state.requestStatus) {
                     case RequestStatus.none:
                     case RequestStatus.loading:
+                      print('HomePage.loading');
                       return const Text('Loading');
                     case RequestStatus.error:
                       return const Text('Error');
                     case RequestStatus.more:
                     case RequestStatus.success:
-                      // print('rebuild.length => ${state.listViewData.length}');
+                      print('rebuild.length => ${state.listViewData.length}');
                       // print(state.listViewData);
+
+                      // state.listViewData.forEach((e) {
+                      //   print('${e.title} => ${e.status}');
+                      // });
 
                       return Expanded(
                         child: CustomListView(

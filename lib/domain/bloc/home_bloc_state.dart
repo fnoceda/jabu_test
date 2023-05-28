@@ -54,7 +54,9 @@ class HomeBlocState extends Equatable {
     String? filterStatus,
     String? filterStringType,
   }) {
-    print('copyWith.filterStatus.ants=>$filterStatus');
+    // print('copyWith.characters.length=>$characters');
+    // print('copyWith.listViewData.length=>$listViewData');
+    print('copyWith.page => $page');
 
     var l = HomeBlocState(
       requestStatus: requestStatus ?? this.requestStatus,
@@ -66,7 +68,7 @@ class HomeBlocState extends Equatable {
       filterString: filterString ?? this.filterString,
       filterStringType: filterStringType ?? this.filterStringType,
     );
-    print('copyWith.filterStatus.dsps=>${l.filterStatus}');
+    print('copyWith.page.dsps=>${l.page}');
 
     return l;
   }

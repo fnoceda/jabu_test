@@ -28,15 +28,20 @@ class CharacterLocalService implements ICharacterLocalRepository {
 
   @override
   Future<Either<FailureModel, List<CharacterModel>>> getCharacterList({
-    int page = 1,
+    required int page,
     String? filterString,
     String? filterStatus,
     String? filterStringType,
   }) async {
     List<CharacterModel> rta = [];
     try {
-      print('page => $page $filterStatus $filterStringType $filterString');
+      page = (page >= 1) ? page - 1 : 0;
+      print(
+          'CharacterLocalService.page => $page $filterStatus $filterStringType $filterString');
       // var allCollections;
+
+      var totalCollections = await isar.characterCollections.where().findAll();
+      print('totalCollections => ${totalCollections.length}');
 
       bool filterByStatus = filterStatus != null &&
           filterStatus.trim() != '' &&
@@ -53,37 +58,29 @@ class CharacterLocalService implements ICharacterLocalRepository {
       var allCollections = await isar.characterCollections
           .filter()
           .optional(filterByStatus, (q) {
-        print("'$filterStatus'");
-        // alive alive
-        return q.statusContains(filterStatus!.trim());
-      }).optional(filterByName, (q) {
-        print('filterByName => $filterString');
-        return q.nameContains(filterString!.trim());
-      }).optional(filterBySpecie, (q) {
-        print('filterBySpecie => $filterString');
+            print("'$filterStatus'");
+            // alive alive
+            return q.statusContains(filterStatus!.trim());
+          })
+          .optional(filterByName, (q) {
+            print('filterByName => $filterString');
+            return q.nameContains(filterString!.trim());
+          })
+          .optional(filterBySpecie, (q) {
+            print('filterBySpecie => $filterString');
 
-        return q.specieContains(filterString!.trim());
-      })
-          // .offset(page * 20)
-          // .limit(20)
+            return q.specieContains(filterString!.trim());
+          })
+          .offset(page * 20)
+          .limit(20)
           .findAll();
+
+      await Future.delayed(const Duration(milliseconds: 100));
 
       print('allCollections1.length=>${allCollections.length}');
 
-      // if (filterStatus != null &&
-      //     filterStatus.trim() != '' &&
-      //     filterStatus.trim() != 'all') {
-      //   allCollections = await isar.characterCollections
-      //       .where()
-      //       .statusEqualTo("alive")
-      //       .offset(page * 20)
-      //       .limit(20)
-      //       .findAll();
-      // }
-      // print('allCollections2.length=>${allCollections.length}');
-
       for (var e in allCollections) {
-        print('${e.id} ${e.name} => "${e.status}"');
+        // print('${e.id} ${e.name} => "${e.status}"');
         rta.add(
           CharacterModel(
             id: e.id.toString(),
