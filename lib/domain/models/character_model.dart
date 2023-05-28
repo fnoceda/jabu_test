@@ -2,7 +2,7 @@ import 'dart:convert';
 
 import 'package:equatable/equatable.dart';
 
-enum CharacterStatus { alive, dead }
+enum CharacterStatus { alive, dead, otro }
 
 Map<String, CharacterStatus> mapStatusValues = {
   "alive": CharacterStatus.alive,

@@ -12,8 +12,8 @@ class CharacterCollection {
   @Index()
   late String status;
 
-  late String image;
-
   @Index()
   late String specie;
+
+  late String image;
 }

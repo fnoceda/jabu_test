@@ -60,6 +60,7 @@ class CharacterDatsources implements CharacterRepository {
         });
       } else {
         result = await characterLocalData.getCharacterList(
+          page: page,
           filterString: filterString,
           filterStatus: filterStatus,
           filterStringType: filterStringType,
