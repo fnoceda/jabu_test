@@ -4,15 +4,16 @@ import 'cache_network_image_wrapper.dart';
 
 class CustomListItem extends StatelessWidget {
   final ListViewModel item;
+  final Function(String)? onItemTap;
 
   const CustomListItem({
     super.key,
     required this.item,
+    this.onItemTap,
   });
 
   @override
   Widget build(BuildContext context) {
-    // print('${item.title} => ${item.status.toLowerCase()}');
     return ListTile(
       leading: CircleAvatar(
         backgroundColor: Colors.yellow,
@@ -23,6 +24,12 @@ class CustomListItem extends StatelessWidget {
       trailing: (item.status.toLowerCase() == 'alive')
           ? const Icon(Icons.check)
           : const Icon(Icons.cancel),
+      onTap: () {
+        if (onItemTap != null) {
+          onItemTap!(item.id);
+        }
+        // context.goNamed('character', pathParameters: {'id': item.id});
+      },
     );
   }
 }

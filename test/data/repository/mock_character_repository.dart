@@ -27,4 +27,17 @@ class MockCharacterRepository implements CharacterRepository {
 
     return Right(rta);
   }
+
+  @override
+  Future<Either<FailureModel, CharacterModel>> getCharacterById(
+      {required int id}) async {
+    CharacterModel data = const CharacterModel(
+      id: '1',
+      name: 'Juan',
+      status: CharacterStatus.alive,
+      image: 'https://static.coinstats.app/coins/1650455588819.png',
+      species: 'Human',
+    );
+    return Right(data);
+  }
 }

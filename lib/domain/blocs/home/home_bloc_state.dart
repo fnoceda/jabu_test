@@ -1,4 +1,3 @@
-// ignore_for_file: public_member_api_docs, sort_constructors_first
 part of 'home_bloc_bloc.dart';
 
 class HomeBlocState extends Equatable {
@@ -54,10 +53,6 @@ class HomeBlocState extends Equatable {
     String? filterStatus,
     String? filterStringType,
   }) {
-    // print('copyWith.characters.length=>$characters');
-    // print('copyWith.listViewData.length=>$listViewData');
-    print('copyWith.page => $page');
-
     var l = HomeBlocState(
       requestStatus: requestStatus ?? this.requestStatus,
       characters: characters ?? this.characters,
@@ -68,7 +63,6 @@ class HomeBlocState extends Equatable {
       filterString: filterString ?? this.filterString,
       filterStringType: filterStringType ?? this.filterStringType,
     );
-    print('copyWith.page.dsps=>${l.page}');
 
     return l;
   }

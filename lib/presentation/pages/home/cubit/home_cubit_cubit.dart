@@ -1,7 +1,7 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 
-import '../../utils/enums.dart';
+import '../../../../utils/enums.dart';
 
 part 'home_cubit_state.dart';
 

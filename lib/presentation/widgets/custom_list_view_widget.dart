@@ -7,9 +7,13 @@ import 'custom_list_view_item.dart';
 class CustomListView extends StatefulWidget {
   final List<ListViewModel> initialData;
   final Future<List<ListViewModel>> Function()? loadMoreData;
-
-  const CustomListView(
-      {super.key, required this.initialData, this.loadMoreData});
+  final Function(String)? onItemTap;
+  const CustomListView({
+    super.key,
+    required this.initialData,
+    this.loadMoreData,
+    this.onItemTap,
+  });
 
   @override
   State<CustomListView> createState() => _CustomListViewState();
@@ -66,7 +70,10 @@ class _CustomListViewState extends State<CustomListView> {
             itemCount: data.length,
             separatorBuilder: (_, __) => const Divider(),
             itemBuilder: (_, i) {
-              return CustomListItem(item: data[i]);
+              return CustomListItem(
+                item: data[i],
+                onItemTap: widget.onItemTap,
+              );
             },
           ),
         ),

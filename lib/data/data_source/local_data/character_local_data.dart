@@ -36,4 +36,10 @@ class CharacterLocalData implements ICharacterLocalRepository {
   Future<void> save({required List<CharacterModel> data}) async {
     await characterLocalService.save(data: data);
   }
+
+  @override
+  Future<Either<FailureModel, CharacterModel>> getCharacterById(
+      {required int id}) async {
+    return await characterLocalService.getCharacterById(id: id);
+  }
 }

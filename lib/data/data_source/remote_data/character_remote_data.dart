@@ -6,7 +6,7 @@ import '../../models/failure_model.dart';
 import '../../repository/character_repository.dart';
 import '../../services/character_remote_service.dart';
 
-class CharacterRemoteData implements CharacterRepository {
+class CharacterRemoteData implements ICharacterRemoteRepository {
   final CharacterRemoteService characterRemoteService;
 
   CharacterRemoteData({required this.characterRemoteService});

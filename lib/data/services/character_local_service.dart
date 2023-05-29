@@ -64,12 +64,18 @@ class CharacterLocalService implements ICharacterLocalRepository {
           })
           .optional(filterByName, (q) {
             print('filterByName => $filterString');
-            return q.nameContains(filterString!.trim());
+            return q.nameContains(
+              filterString!.trim().toLowerCase(),
+              caseSensitive: false,
+            );
           })
           .optional(filterBySpecie, (q) {
             print('filterBySpecie => $filterString');
 
-            return q.specieContains(filterString!.trim());
+            return q.specieContains(
+              filterString!.trim().toLowerCase(),
+              caseSensitive: false,
+            );
           })
           .offset(page * 20)
           .limit(20)
@@ -92,6 +98,37 @@ class CharacterLocalService implements ICharacterLocalRepository {
         );
       }
       return Right(rta);
+    } catch (e, s) {
+      if (kDebugMode) {
+        print(e);
+        print(s);
+      }
+      return const Left(
+        FailureModel(status: 500, message: 'Fail retriving local data'),
+      );
+    }
+  }
+
+  @override
+  Future<Either<FailureModel, CharacterModel>> getCharacterById({
+    required int id,
+  }) async {
+    try {
+      var e = await isar.characterCollections.get(id);
+      // await Future.delayed(const Duration(milliseconds: 100));
+      if (e != null) {
+        var character = CharacterModel(
+          id: e.id.toString(),
+          name: e.name,
+          status: mapStatusValues[e.status]!,
+          image: e.image,
+          species: e.specie,
+        );
+        return Right(character);
+      }
+      return const Left(
+        FailureModel(status: 404, message: 'Character not found'),
+      );
     } catch (e, s) {
       if (kDebugMode) {
         print(e);

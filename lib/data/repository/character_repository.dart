@@ -8,7 +8,12 @@ import '../models/failure_model.dart';
 import '../services/check_internet_service.dart';
 
 abstract class ICharacterRemoteRepository {
-  Future<Either<FailureModel, List<CharacterModel>>> getCharacterList();
+  Future<Either<FailureModel, List<CharacterModel>>> getCharacterList({
+    required int page,
+    String? filterString,
+    String? filterStatus,
+    String? filterStringType,
+  });
 }
 
 abstract class ICharacterLocalRepository {
@@ -19,6 +24,9 @@ abstract class ICharacterLocalRepository {
     String? filterStringType,
   });
   Future<void> save({required List<CharacterModel> data});
+  Future<Either<FailureModel, CharacterModel>> getCharacterById({
+    required int id,
+  });
 }
 
 abstract class CharacterRepository {
@@ -27,6 +35,9 @@ abstract class CharacterRepository {
     String? filterString,
     String? filterStatus,
     String? filterStringType,
+  });
+  Future<Either<FailureModel, CharacterModel>> getCharacterById({
+    required int id,
   });
 }
 
@@ -49,7 +60,6 @@ class CharacterDatsources implements CharacterRepository {
     String? filterStringType,
   }) async {
     try {
-      print('CharacterDatsources.page=> $page');
       bool hasInternet = await checkInternetService.checkInternet();
       Either<FailureModel, List<CharacterModel>> result;
       if (hasInternet) {
@@ -80,5 +90,11 @@ class CharacterDatsources implements CharacterRepository {
       }
       return const Left(FailureModel(status: 500, message: 'Unimplemented'));
     }
+  }
+
+  @override
+  Future<Either<FailureModel, CharacterModel>> getCharacterById(
+      {required int id}) async {
+    return characterLocalData.getCharacterById(id: id);
   }
 }

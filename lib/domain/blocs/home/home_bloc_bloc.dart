@@ -3,7 +3,8 @@ import 'package:equatable/equatable.dart';
 import 'package:jabu_test_bloc/data/repository/character_repository.dart';
 import 'package:jabu_test_bloc/domain/models/character_model.dart';
 import 'package:jabu_test_bloc/presentation/models/list_view_model.dart';
-import '../../utils/enums.dart';
+
+import '../../../utils/enums.dart';
 
 part 'home_bloc_event.dart';
 part 'home_bloc_state.dart';
@@ -13,22 +14,15 @@ class HomeBlocBloc extends Bloc<HomeBlocEvent, HomeBlocState> {
   HomeBlocBloc({required this.repo}) : super(HomeBlocState.initial()) {
     on<HomeBlocEvent>((event, emit) {});
     on<HomeBlocHttpLoadingEvent>((event, emit) {
-      // print( 'HomeBlocHttpLoadingEvent.state.filterStatus => ${state.filterStatus}');
       emit(state.copyWith(
         requestStatus: RequestStatus.loading,
         listViewData: [],
         characters: [],
       ));
-      // print(  'HomeBlocHttpLoadingEvent.finish.filterStatus => ${state.filterStatus}');
     });
 
     on<HomeBlocHttpLoadingMoreEvent>((event, emit) {
-      // print('HomeBlocHttpLoadingMoreEvent.finish.page => ${state.page}');
-
-      // print('HomeBlocHttpLoadingMoreEvent.init');
       emit(state.copyWith(requestStatus: RequestStatus.more));
-      // print('HomeBlocHttpLoadingMoreEvent.finish.page => ${state.page}');
-      // print( 'HomeBlocHttpLoadingMoreEvent.finish.filterStatus => ${state.filterStatus}');
     });
 
     on<HomeBlocHttpFailEvent>((event, emit) {
@@ -41,8 +35,6 @@ class HomeBlocBloc extends Bloc<HomeBlocEvent, HomeBlocState> {
     });
 
     on<HomeBlocHttpSuccessEvent>((event, emit) {
-      print(
-          'HomeBlocHttpSuccessEvent.state.filterStatus => ${state.filterStatus}');
       emit(
         state.copyWith(
             page: event.page,
@@ -51,22 +43,15 @@ class HomeBlocBloc extends Bloc<HomeBlocEvent, HomeBlocState> {
             characters: [...state.characters, ...event.characters],
             listViewData: [...state.listViewData, ...event.viewNewData]),
       );
-      print(
-          'HomeBlocHttpSuccessEvent.finish.filterStatus => ${state.filterStatus}');
     });
 
     on<HomeBlocChangeFilterEvent>((event, emit) {
-      // print( 'HomeBlocChangeFilterEvent.event.filterStatus=>${event.filterStatus}');
-      // print('ants=>$state');
       emit(state.copyWith(
         page: 1,
         filterString: event.filterString ?? state.filterString,
         filterStatus: event.filterStatus ?? state.filterStatus,
         filterStringType: event.filterStringType ?? state.filterStringType,
       ));
-      print(
-          'HomeBlocChangeFilterEvent.finish.filterStatus=>${state.filterStatus}');
-      // print('dsps=>$state');
     });
 
     _init();
@@ -81,9 +66,6 @@ class HomeBlocBloc extends Bloc<HomeBlocEvent, HomeBlocState> {
     String? filterStatus,
     String? filterStringType,
   }) async {
-    // print( 'changeFilters.param.filterStatus=>$filterStatus filterName=> $filterString filterSpecies=> $filterStringType');
-    // print( 'changeFilters.state.filterStatus=>${state.filterStatus} filterName=> ${state.filterString} filterSpecies=>${state.filterStringType}');
-    // print('changeFilters.init');
     add(HomeBlocChangeFilterEvent(
       filterString: filterString,
       filterStatus: filterStatus,
@@ -98,20 +80,12 @@ class HomeBlocBloc extends Bloc<HomeBlocEvent, HomeBlocState> {
         filterStatus != null;
 
     if (searchCond) {
-      print('HomeBloc.searchData=> $searchCond');
-
       await getNewData(
         filterString: filterString ?? state.filterString,
         filterStatus: filterStatus ?? state.filterStatus,
         filterStringType: filterStringType ?? state.filterStringType,
       );
-    } else {
-      print('HomeBloc.searchCond=> $searchCond');
     }
-
-    // print('changeFilters.state.filterName=> ${state.filterName}');
-    // print('changeFilters.state.filterStatus=> ${state.filterStatus}');
-    // print('changeFilters.state.filterSpecies=> ${state.filterSpecies}');
   }
 
   Future<void> getNewData({
@@ -119,8 +93,8 @@ class HomeBlocBloc extends Bloc<HomeBlocEvent, HomeBlocState> {
     String? filterStatus,
     String? filterStringType,
   }) async {
-    add(const HomeBlocHttpLoadingEvent()); //kaka
-    // print('getNewData.param.filterStatus=>${filterStatus}');
+    add(const HomeBlocHttpLoadingEvent());
+
     await getData(
       page: 1,
       filterStatus: filterStatus,
@@ -131,8 +105,6 @@ class HomeBlocBloc extends Bloc<HomeBlocEvent, HomeBlocState> {
 
   Future<List<ListViewModel>> getMoreData() async {
     add(const HomeBlocHttpLoadingMoreEvent());
-    // print('getMoreData.filterStatus => ${state.filterStatus}');
-    // print('getMoreData.page => ${state.page}');
 
     List<ListViewModel> rta = await getData(
       page: state.page + 1,
@@ -163,6 +135,7 @@ class HomeBlocBloc extends Bloc<HomeBlocEvent, HomeBlocState> {
     }, (r) {
       List<ListViewModel> newViewData = r.map((e) {
         return ListViewModel(
+          id: e.id,
           title: e.name,
           subTitle: e.species,
           status: e.status == CharacterStatus.alive ? "alive" : "dead",

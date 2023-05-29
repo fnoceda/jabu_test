@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:jabu_test_bloc/domain/bloc/home_bloc_bloc.dart';
+import 'package:go_router/go_router.dart';
 import 'package:jabu_test_bloc/presentation/models/list_view_model.dart';
 import 'package:jabu_test_bloc/utils/extensions/debounce_text_field.dart';
 
-import '../../utils/enums.dart';
-import '../cubit/home_cubit_cubit.dart';
-import '../widgets/custom_list_view_widget.dart';
+import '../../../domain/blocs/home/home_bloc_bloc.dart';
+import '../../../utils/enums.dart';
+import '../../widgets/custom_list_view_widget.dart';
+import 'cubit/home_cubit_cubit.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -87,6 +88,10 @@ class _HomePageState extends State<HomePage> {
                         child: CustomListView(
                           initialData: state.listViewData,
                           loadMoreData: _getMoreData,
+                          onItemTap: (String id) {
+                            context.goNamed('character',
+                                pathParameters: {'id': id});
+                          },
                         ),
                       );
                   }
