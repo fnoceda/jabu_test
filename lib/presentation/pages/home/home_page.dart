@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:go_router/go_router.dart';
 import 'package:jabu_test_bloc/presentation/models/list_view_model.dart';
+import 'package:jabu_test_bloc/router.dart';
 import 'package:jabu_test_bloc/utils/extensions/debounce_text_field.dart';
 
 import '../../../domain/blocs/home/home_bloc_bloc.dart';
@@ -9,31 +9,16 @@ import '../../../utils/enums.dart';
 import '../../widgets/custom_list_view_widget.dart';
 import 'cubit/home_cubit_cubit.dart';
 
-class HomePage extends StatefulWidget {
+final TextEditingController searchController = TextEditingController();
+
+class HomePage extends StatelessWidget {
   const HomePage({super.key});
 
-  @override
-  State<HomePage> createState() => _HomePageState();
-}
-
-class _HomePageState extends State<HomePage> {
-  final TextEditingController searchController = TextEditingController();
-
-  Future<List<CustomListTileModel>> _getMoreData() async {
-    print('call to _getMoreData');
+  Future<List<CustomListTileModel>> _getMoreData(BuildContext context) async {
+    // print('call to _getMoreData');
     var result = context.read<HomeBlocBloc>().getMoreData();
     return result;
   }
-
-  // _inputChange(String text) {
-  //   context
-  //       .read<HomeBlocBloc>()
-  //       .changeFilters(filterName: searchController.text);
-  // }
-
-  // _typeChange(String type) {
-  //   context.read<HomeBlocBloc>().changeFilters(filterSpecies: type);
-  // }
 
   @override
   Widget build(BuildContext context) {
@@ -78,19 +63,14 @@ class _HomePageState extends State<HomePage> {
                     case RequestStatus.more:
                     case RequestStatus.success:
                       print('rebuild.length => ${state.listViewData.length}');
-                      // print(state.listViewData);
-
-                      // state.listViewData.forEach((e) {
-                      //   print('${e.title} => ${e.status}');
-                      // });
 
                       return Expanded(
                         child: CustomListView(
                           initialData: state.listViewData,
                           loadMoreData: _getMoreData,
                           onItemTap: (String id) {
-                            context.goNamed('character',
-                                pathParameters: {'id': id});
+                            AppNavigator.router
+                                .navigateTo(context, 'detail/$id');
                           },
                         ),
                       );

@@ -8,8 +8,10 @@
 import 'dart:io';
 
 import 'package:flutter/foundation.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:jabu_test_bloc/app.dart';
+import 'package:jabu_test_bloc/router.dart';
 import 'package:mockito/mockito.dart';
 import 'package:http/http.dart' as http;
 import 'mock_locator.dart';
@@ -23,8 +25,11 @@ class MockHttpClient extends Mock implements http.Client {
 
 void main() {
   setUp(() {
+    // await initHiveForFlutter();
+    AppNavigator.configureRoutes();
     MockGetIt.setUpLocators();
     HttpOverrides.global = null;
+    WidgetsFlutterBinding.ensureInitialized();
   });
   testWidgets('Home Page Widget Test', (WidgetTester tester) async {
     await tester.runAsync(() async {

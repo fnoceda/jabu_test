@@ -6,7 +6,7 @@ import 'custom_list_view_item.dart';
 
 class CustomListView extends StatefulWidget {
   final List<CustomListTileModel> initialData;
-  final Future<List<CustomListTileModel>> Function()? loadMoreData;
+  final Future<List<CustomListTileModel>> Function(BuildContext)? loadMoreData;
   final Function(String)? onItemTap;
   const CustomListView({
     super.key,
@@ -41,7 +41,8 @@ class _CustomListViewState extends State<CustomListView> {
       if (position > nextPageTrigger) {
         if (!loadingMoreData) {
           loadingMoreData = true;
-          List<CustomListTileModel> result = await widget.loadMoreData!();
+          List<CustomListTileModel> result =
+              await widget.loadMoreData!(context);
           data.addAll(result);
           loadingMoreData = false;
         }
