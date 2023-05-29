@@ -2,7 +2,6 @@ import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:jabu_test_bloc/data/repository/character_repository.dart';
 import 'package:jabu_test_bloc/domain/models/character_model.dart';
-import 'package:jabu_test_bloc/locator.dart';
 import 'package:jabu_test_bloc/presentation/models/list_view_model.dart';
 
 import '../../../presentation/widgets/cache_network_image_wrapper.dart';
@@ -13,7 +12,9 @@ part 'home_bloc_state.dart';
 
 class HomeBlocBloc extends Bloc<HomeBlocEvent, HomeBlocState> {
   final CharacterRepository repo;
-  HomeBlocBloc({required this.repo}) : super(HomeBlocState.initial()) {
+  final CachedNetworkImageWrapper imageBuilder;
+  HomeBlocBloc({required this.repo, required this.imageBuilder})
+      : super(HomeBlocState.initial()) {
     on<HomeBlocEvent>((event, emit) {});
     on<HomeBlocHttpLoadingEvent>((event, emit) {
       emit(state.copyWith(
@@ -141,9 +142,7 @@ class HomeBlocBloc extends Bloc<HomeBlocEvent, HomeBlocState> {
           title: e.name,
           subTitle: e.species,
           status: e.status == CharacterStatus.alive ? "alive" : "dead",
-          image: Locator.sl
-              .get<CachedNetworkImageWrapper>()
-              .getImage(imgUrl: e.image),
+          image: imageBuilder.getImage(imgUrl: e.image),
         );
       }).toList();
       var lastPage = (r.length > 0) ? state.page + 1 : state.page;

@@ -5,6 +5,7 @@ import 'package:jabu_test_bloc/locator.dart';
 import 'package:jabu_test_bloc/router.dart';
 import 'domain/blocs/home/home_bloc_bloc.dart';
 import 'presentation/pages/home/cubit/home_cubit_cubit.dart';
+import 'presentation/widgets/cache_network_image_wrapper.dart';
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
@@ -14,8 +15,9 @@ class MyApp extends StatelessWidget {
     return MultiBlocProvider(
         providers: [
           BlocProvider(
-            create: (_) =>
-                HomeBlocBloc(repo: Locator.sl.get<CharacterRepository>()),
+            create: (_) => HomeBlocBloc(
+                repo: Locator.sl.get<CharacterRepository>(),
+                imageBuilder: Locator.sl.get<CachedNetworkImageWrapper>()),
           ),
           BlocProvider(create: (_) => HomeCubitCubit())
         ],
