@@ -36,7 +36,7 @@ class CharacterRemoteService {
       filters += 'status: "$filterStatus"';
     }
 
-    print('CharacterRemoteService.filterStatus=> $filterStatus');
+    // print('CharacterRemoteService.filterStatus=> $filterStatus');
     // print('CharacterRemoteService.filterSpecies=> $filterSpecies');
     print('CharacterRemoteService.filterName=> $filterString');
 
