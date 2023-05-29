@@ -1,45 +1,12 @@
 import 'package:dartz/dartz.dart';
 import 'package:flutter/foundation.dart';
-import 'package:jabu_test_bloc/data/data_source/local_data/character_local_data.dart';
 
 import '../../domain/models/character_model.dart';
-import '../data_source/remote_data/character_remote_data.dart';
+import '../../domain/repository/character_repository.dart';
+import '../sources/local_data/character_local_data.dart';
+import '../sources/remote_data/character_remote_data.dart';
 import '../models/failure_model.dart';
 import '../services/check_internet_service.dart';
-
-abstract class ICharacterRemoteRepository {
-  Future<Either<FailureModel, List<CharacterModel>>> getCharacterList({
-    required int page,
-    String? filterString,
-    String? filterStatus,
-    String? filterStringType,
-  });
-}
-
-abstract class ICharacterLocalRepository {
-  Future<Either<FailureModel, List<CharacterModel>>> getCharacterList({
-    required int page,
-    String? filterString,
-    String? filterStatus,
-    String? filterStringType,
-  });
-  Future<void> save({required List<CharacterModel> data});
-  Future<Either<FailureModel, CharacterModel>> getCharacterById({
-    required int id,
-  });
-}
-
-abstract class CharacterRepository {
-  Future<Either<FailureModel, List<CharacterModel>>> getCharacterList({
-    required int page,
-    String? filterString,
-    String? filterStatus,
-    String? filterStringType,
-  });
-  Future<Either<FailureModel, CharacterModel>> getCharacterById({
-    required String id,
-  });
-}
 
 class CharacterDatsources implements CharacterRepository {
   final CheckInternetService checkInternetService;

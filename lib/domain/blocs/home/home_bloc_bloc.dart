@@ -1,11 +1,11 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
-import 'package:jabu_test_bloc/data/repository/character_repository.dart';
 import 'package:jabu_test_bloc/domain/models/character_model.dart';
 import 'package:jabu_test_bloc/presentation/models/list_view_model.dart';
 
 import '../../../presentation/widgets/cache_network_image_wrapper.dart';
 import '../../../utils/enums.dart';
+import '../../repository/character_repository.dart';
 
 part 'home_bloc_event.dart';
 part 'home_bloc_state.dart';

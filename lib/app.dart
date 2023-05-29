@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:jabu_test_bloc/data/repository/character_repository.dart';
 import 'package:jabu_test_bloc/domain/blocs/detail/detail_bloc.dart';
 import 'package:jabu_test_bloc/locator.dart';
 import 'package:jabu_test_bloc/router.dart';
 import 'domain/blocs/home/home_bloc_bloc.dart';
+import 'domain/repository/character_repository.dart';
 import 'presentation/pages/home/cubit/home_cubit_cubit.dart';
 import 'presentation/widgets/cache_network_image_wrapper.dart';
 

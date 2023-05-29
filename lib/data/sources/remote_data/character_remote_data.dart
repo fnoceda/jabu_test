@@ -2,8 +2,8 @@ import 'package:dartz/dartz.dart';
 import 'package:flutter/foundation.dart';
 
 import '../../../domain/models/character_model.dart';
+import '../../../domain/repository/character_repository.dart';
 import '../../models/failure_model.dart';
-import '../../repository/character_repository.dart';
 import '../../services/character_remote_service.dart';
 
 class CharacterRemoteData implements ICharacterRemoteRepository {

@@ -2,10 +2,10 @@ import 'package:dartz/dartz.dart';
 import 'package:flutter/foundation.dart';
 import 'package:isar/isar.dart';
 import 'package:jabu_test_bloc/data/models/failure_model.dart';
-import 'package:jabu_test_bloc/data/repository/character_repository.dart';
 import 'package:jabu_test_bloc/domain/models/character_model.dart';
 
-import '../data_source/local_data/collections/character_collection.dart';
+import '../../domain/repository/character_repository.dart';
+import '../sources/local_data/collections/character_collection.dart';
 
 class CharacterLocalService implements ICharacterLocalRepository {
   final Isar isar;

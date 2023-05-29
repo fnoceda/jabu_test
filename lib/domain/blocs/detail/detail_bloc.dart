@@ -1,11 +1,11 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 
-import '../../../data/repository/character_repository.dart';
 import '../../../presentation/models/list_view_model.dart';
 import '../../../presentation/widgets/cache_network_image_wrapper.dart';
 import '../../../utils/enums.dart';
 import '../../models/character_model.dart';
+import '../../repository/character_repository.dart';
 
 part 'detail_event.dart';
 part 'detail_state.dart';

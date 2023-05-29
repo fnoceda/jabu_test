@@ -1,5 +1,5 @@
 import 'package:get_it/get_it.dart';
-import 'package:jabu_test_bloc/data/repository/character_repository.dart';
+import 'package:jabu_test_bloc/domain/repository/character_repository.dart';
 import 'package:jabu_test_bloc/presentation/widgets/cache_network_image_wrapper.dart';
 
 import 'data/repository/mock_character_repository.dart';

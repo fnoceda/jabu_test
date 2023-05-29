@@ -2,8 +2,8 @@ import 'package:dartz/dartz.dart';
 import 'package:flutter/foundation.dart';
 
 import '../../../domain/models/character_model.dart';
+import '../../../domain/repository/character_repository.dart';
 import '../../models/failure_model.dart';
-import '../../repository/character_repository.dart';
 import '../../services/character_local_service.dart';
 
 class CharacterLocalData implements ICharacterLocalRepository {
