@@ -24,7 +24,7 @@ class HomeBlocHttpLoadingMoreEvent extends HomeBlocEvent {
 class HomeBlocHttpSuccessEvent extends HomeBlocEvent {
   final int page;
   final List<CharacterModel> characters;
-  final List<ListViewModel> viewNewData;
+  final List<CustomListTileModel> viewNewData;
 
   const HomeBlocHttpSuccessEvent({
     required this.characters,

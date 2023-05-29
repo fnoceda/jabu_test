@@ -115,7 +115,7 @@ class CharacterLocalService implements ICharacterLocalRepository {
   }) async {
     try {
       var e = await isar.characterCollections.get(id);
-      // await Future.delayed(const Duration(milliseconds: 100));
+      await Future.delayed(const Duration(milliseconds: 100));
       if (e != null) {
         var character = CharacterModel(
           id: e.id.toString(),

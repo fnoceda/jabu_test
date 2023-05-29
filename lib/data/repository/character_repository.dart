@@ -37,7 +37,7 @@ abstract class CharacterRepository {
     String? filterStringType,
   });
   Future<Either<FailureModel, CharacterModel>> getCharacterById({
-    required int id,
+    required String id,
   });
 }
 
@@ -94,7 +94,7 @@ class CharacterDatsources implements CharacterRepository {
 
   @override
   Future<Either<FailureModel, CharacterModel>> getCharacterById(
-      {required int id}) async {
-    return characterLocalData.getCharacterById(id: id);
+      {required String id}) async {
+    return characterLocalData.getCharacterById(id: int.parse(id));
   }
 }

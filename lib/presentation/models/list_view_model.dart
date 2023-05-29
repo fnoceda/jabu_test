@@ -1,14 +1,14 @@
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 
-class ListViewModel extends Equatable {
+class CustomListTileModel extends Equatable {
   final String id;
   final String title;
   final String status;
   final String subTitle;
   final Widget image;
 
-  const ListViewModel({
+  const CustomListTileModel({
     required this.id,
     required this.title,
     required this.status,

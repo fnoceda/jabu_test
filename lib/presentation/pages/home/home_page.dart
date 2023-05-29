@@ -19,7 +19,7 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   final TextEditingController searchController = TextEditingController();
 
-  Future<List<ListViewModel>> _getMoreData() async {
+  Future<List<CustomListTileModel>> _getMoreData() async {
     print('call to _getMoreData');
     var result = context.read<HomeBlocBloc>().getMoreData();
     return result;

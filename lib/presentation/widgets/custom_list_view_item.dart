@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import '../models/list_view_model.dart';
 
 class CustomListItem extends StatelessWidget {
-  final ListViewModel item;
+  final CustomListTileModel item;
   final Function(String)? onItemTap;
 
   const CustomListItem({

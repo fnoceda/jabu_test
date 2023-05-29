@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:jabu_test_bloc/data/repository/character_repository.dart';
+import 'package:jabu_test_bloc/domain/blocs/detail/detail_bloc.dart';
 import 'package:jabu_test_bloc/locator.dart';
 import 'package:jabu_test_bloc/router.dart';
 import 'domain/blocs/home/home_bloc_bloc.dart';
@@ -16,10 +17,17 @@ class MyApp extends StatelessWidget {
         providers: [
           BlocProvider(
             create: (_) => HomeBlocBloc(
-                repo: Locator.sl.get<CharacterRepository>(),
-                imageBuilder: Locator.sl.get<CachedNetworkImageWrapper>()),
+              repo: Locator.sl.get<CharacterRepository>(),
+              imageBuilder: Locator.sl.get<CachedNetworkImageWrapper>(),
+            ),
           ),
-          BlocProvider(create: (_) => HomeCubitCubit())
+          BlocProvider(create: (_) => HomeCubitCubit()),
+          BlocProvider(
+            create: (_) => DetailBloc(
+              repo: Locator.sl.get<CharacterRepository>(),
+              imageBuilder: Locator.sl.get<CachedNetworkImageWrapper>(),
+            ),
+          ),
         ],
         child: MaterialApp.router(
           title: 'Flutter Demo',

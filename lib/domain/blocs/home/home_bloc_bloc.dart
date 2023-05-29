@@ -106,10 +106,10 @@ class HomeBlocBloc extends Bloc<HomeBlocEvent, HomeBlocState> {
     );
   }
 
-  Future<List<ListViewModel>> getMoreData() async {
+  Future<List<CustomListTileModel>> getMoreData() async {
     add(const HomeBlocHttpLoadingMoreEvent());
 
-    List<ListViewModel> rta = await getData(
+    List<CustomListTileModel> rta = await getData(
       page: state.page + 1,
       filterStatus: state.filterStatus,
       filterString: state.filterString,
@@ -118,13 +118,13 @@ class HomeBlocBloc extends Bloc<HomeBlocEvent, HomeBlocState> {
     return rta;
   }
 
-  Future<List<ListViewModel>> getData({
+  Future<List<CustomListTileModel>> getData({
     required int page,
     String? filterStatus,
     String? filterString,
     String? filterStringType,
   }) async {
-    List<ListViewModel> rta = [];
+    List<CustomListTileModel> rta = [];
 
     var result = await repo.getCharacterList(
       page: page,
@@ -136,8 +136,8 @@ class HomeBlocBloc extends Bloc<HomeBlocEvent, HomeBlocState> {
       add(HomeBlocHttpFailEvent(errorMessage: l.message));
       return [];
     }, (r) {
-      List<ListViewModel> newViewData = r.map((e) {
-        return ListViewModel(
+      List<CustomListTileModel> newViewData = r.map((e) {
+        return CustomListTileModel(
           id: e.id,
           title: e.name,
           subTitle: e.species,

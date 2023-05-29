@@ -3,7 +3,7 @@ part of 'home_bloc_bloc.dart';
 class HomeBlocState extends Equatable {
   final RequestStatus requestStatus;
   final List<CharacterModel> characters;
-  final List<ListViewModel> listViewData;
+  final List<CustomListTileModel> listViewData;
   final String? errorMessage;
 
   final int page;
@@ -46,7 +46,7 @@ class HomeBlocState extends Equatable {
   HomeBlocState copyWith({
     RequestStatus? requestStatus,
     List<CharacterModel>? characters,
-    List<ListViewModel>? listViewData,
+    List<CustomListTileModel>? listViewData,
     int? page,
     String? errorMessage,
     String? filterString,
