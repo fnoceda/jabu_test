@@ -18,7 +18,7 @@ class CharacterLocalData implements ICharacterLocalRepository {
     String? filterStringType,
   }) async {
     try {
-      print('CharacterLocalData.page = $page');
+      // print('CharacterLocalData.page = $page');
       return await characterLocalService.getCharacterList(
         page: page,
         filterString: filterString,

@@ -145,7 +145,7 @@ class HomeBlocBloc extends Bloc<HomeBlocEvent, HomeBlocState> {
           image: imageBuilder.getImage(imgUrl: e.image),
         );
       }).toList();
-      var lastPage = (r.length > 0) ? state.page + 1 : state.page;
+      var lastPage = (r.isNotEmpty) ? state.page + 1 : state.page;
       add(HomeBlocHttpSuccessEvent(
           characters: r, viewNewData: newViewData, page: lastPage));
       return newViewData;

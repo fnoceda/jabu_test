@@ -36,12 +36,11 @@ class CharacterLocalService implements ICharacterLocalRepository {
     List<CharacterModel> rta = [];
     try {
       page = (page >= 1) ? page - 1 : 0;
-      print(
-          'CharacterLocalService.page => $page $filterStatus $filterStringType $filterString');
+      // print(  'CharacterLocalService.page => $page $filterStatus $filterStringType $filterString');
       // var allCollections;
 
-      var totalCollections = await isar.characterCollections.where().findAll();
-      print('totalCollections => ${totalCollections.length}');
+      // var totalCollections = await isar.characterCollections.where().findAll();
+      // print('totalCollections => ${totalCollections.length}');
 
       bool filterByStatus = filterStatus != null &&
           filterStatus.trim() != '' &&
@@ -58,19 +57,19 @@ class CharacterLocalService implements ICharacterLocalRepository {
       var allCollections = await isar.characterCollections
           .filter()
           .optional(filterByStatus, (q) {
-            print("'$filterStatus'");
+            // print("'$filterStatus'");
             // alive alive
             return q.statusEqualTo(filterStatus!.trim());
           })
           .optional(filterByName, (q) {
-            print('filterByName => $filterString');
+            // print('filterByName => $filterString');
             return q.nameContains(
               filterString!.trim().toLowerCase(),
               caseSensitive: false,
             );
           })
           .optional(filterBySpecie, (q) {
-            print('filterBySpecie => $filterString');
+            // print('filterBySpecie => $filterString');
 
             return q.specieContains(
               filterString!.trim().toLowerCase(),
@@ -83,7 +82,7 @@ class CharacterLocalService implements ICharacterLocalRepository {
 
       await Future.delayed(const Duration(milliseconds: 100));
 
-      print('allCollections1.length=>${allCollections.length}');
+      // print('allCollections1.length=>${allCollections.length}');
 
       for (var e in allCollections) {
         // print('${e.id} ${e.name} => "${e.status}"');

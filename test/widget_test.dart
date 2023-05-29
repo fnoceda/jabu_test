@@ -7,7 +7,6 @@
 
 import 'dart:io';
 
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:jabu_test_bloc/app.dart';
@@ -27,7 +26,7 @@ void main() {
   setUp(() {
     // await initHiveForFlutter();
     AppNavigator.configureRoutes();
-    MockGetIt.setUpLocators();
+    MockGetItWithInternet.setUpLocators();
     HttpOverrides.global = null;
     WidgetsFlutterBinding.ensureInitialized();
   });

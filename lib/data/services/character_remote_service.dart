@@ -1,17 +1,13 @@
 import 'package:dartz/dartz.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
 
-import '../../utils/config.dart';
 import '../models/failure_model.dart';
 import '../models/success_model.dart';
 
-GraphQLClient graphQLClient = GraphQLClient(
-  cache: GraphQLCache(store: HiveStore()),
-  link: HttpLink(AppConfig.baseUrl),
-);
-
 class CharacterRemoteService {
-  List<dynamic> result = [];
+  final GraphQLClient graphQLClient;
+
+  CharacterRemoteService({required this.graphQLClient});
   Future<Either<FailureModel, SuccessModel>> getCharacterList({
     int page = 1,
     String? filterString,
@@ -38,7 +34,7 @@ class CharacterRemoteService {
 
     // print('CharacterRemoteService.filterStatus=> $filterStatus');
     // print('CharacterRemoteService.filterSpecies=> $filterSpecies');
-    print('CharacterRemoteService.filterName=> $filterString');
+    // print('CharacterRemoteService.filterName=> $filterString');
 
     String query = """
                               query {
@@ -54,7 +50,7 @@ class CharacterRemoteService {
                               }
                               """;
 
-    print(query);
+    // print(query);
 
     QueryResult<dynamic> result = await graphQLClient.query(
       QueryOptions(
@@ -63,7 +59,7 @@ class CharacterRemoteService {
       ),
     );
 
-    print(result.data);
+    // print(result.data);
 
     try {
       // if (kDebugMode) print(result.data?['characters']);
@@ -76,7 +72,7 @@ class CharacterRemoteService {
         ),
       );
     } catch (e) {
-      print(e);
+      // print(e);
       return const Left(
           FailureModel(status: 500, message: 'Fail Retriving data'));
     }

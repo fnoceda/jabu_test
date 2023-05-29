@@ -58,7 +58,7 @@ class _CustomListViewState extends State<CustomListView> {
 
   @override
   Widget build(BuildContext context) {
-    print('rebuild CustomListView');
+    // print('rebuild CustomListView');
     Size size = MediaQuery.of(context).size;
     return Column(
       children: [

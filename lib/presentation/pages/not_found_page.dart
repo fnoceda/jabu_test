@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 class NotFoundPage extends StatelessWidget {
@@ -8,6 +9,7 @@ class NotFoundPage extends StatelessWidget {
     return SingleChildScrollView(
       child: Center(
         child: Container(
+          color: Colors.white,
           width: double.infinity,
           height: 200,
           child: Column(
@@ -19,7 +21,11 @@ class NotFoundPage extends StatelessWidget {
                 style: TextStyle(fontSize: 100),
               ),
               TextButton(
-                onPressed: () => print('click'),
+                onPressed: () {
+                  if (kDebugMode) {
+                    print('click');
+                  }
+                },
                 child: const Text('Volver'),
               ),
               const Spacer(),

@@ -37,17 +37,17 @@ class DetailBloc extends Bloc<DetailEvent, DetailState> {
   }
 
   Future<void> getCharacter({required String id}) async {
-    print('getCharacter.1');
+    // print('getCharacter.1');
     add(const DetailFechthingEvent());
     var result = await repo.getCharacterById(id: id);
-    print('getCharacter.2');
+    // print('getCharacter.2');
 
     result.fold((l) {
-      print('fail');
+      // print('fail');
 
       add(const DetailFechtFailEvent(errorMessage: 'Fail retriving data'));
     }, (r) {
-      print('success');
+      // print('success');
 
       CustomListTileModel viewNewData = CustomListTileModel(
         id: r.id,
@@ -61,6 +61,6 @@ class DetailBloc extends Bloc<DetailEvent, DetailState> {
         viewNewData: viewNewData,
       ));
     });
-    print('getCharacter.3');
+    // print('getCharacter.3');
   }
 }

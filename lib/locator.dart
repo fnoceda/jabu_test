@@ -1,6 +1,8 @@
 import 'package:get_it/get_it.dart';
+import 'package:graphql_flutter/graphql_flutter.dart';
 import 'package:isar/isar.dart';
 import 'package:jabu_test_bloc/presentation/widgets/cache_network_image_wrapper.dart';
+import 'package:jabu_test_bloc/utils/config.dart';
 import 'package:path_provider/path_provider.dart';
 
 import 'data/repository/data_sources.dart.dart';
@@ -20,12 +22,18 @@ class Locator {
     final dir = await getApplicationSupportDirectory();
     final isar =
         await Isar.open([CharacterCollectionSchema], directory: dir.path);
-
     CheckInternetService checkInternetService = CheckInternetService();
-    CharacterRemoteData characterRemoteData =
-        CharacterRemoteData(characterRemoteService: CharacterRemoteService());
+
     CharacterLocalData characterLocalData = CharacterLocalData(
         characterLocalService: CharacterLocalService(isar: isar));
+    GraphQLClient graphQLClient = GraphQLClient(
+      cache: GraphQLCache(store: HiveStore()),
+      link: HttpLink(AppConfig.baseUrl),
+    );
+
+    CharacterRemoteData characterRemoteData = CharacterRemoteData(
+        characterRemoteService:
+            CharacterRemoteService(graphQLClient: graphQLClient));
 
     CharacterRepository characterRepository = CharacterDatsources(
       checkInternetService: checkInternetService,
@@ -33,7 +41,6 @@ class Locator {
       characterLocalData: characterLocalData,
     );
 
-    // sl.registerSingleton<CheckInternetService>(CheckInternetService());
     sl.registerSingleton<CharacterRepository>(characterRepository);
 
     sl.registerSingleton<CachedNetworkImageWrapper>(
