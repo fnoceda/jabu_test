@@ -1,6 +1,7 @@
 import 'package:get_it/get_it.dart';
 import 'package:isar/isar.dart';
 import 'package:jabu_test_bloc/data/data_source/local_data/character_local_data.dart';
+import 'package:jabu_test_bloc/presentation/widgets/cache_network_image_wrapper.dart';
 import 'package:path_provider/path_provider.dart';
 
 import 'data/data_source/local_data/collections/character_collection.dart';
@@ -33,5 +34,8 @@ class Locator {
 
     // sl.registerSingleton<CheckInternetService>(CheckInternetService());
     sl.registerSingleton<CharacterRepository>(characterRepository);
+
+    sl.registerSingleton<CachedNetworkImageWrapper>(
+        CachedNetworkImageWrapper());
   }
 }

@@ -2,7 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 
 class CachedNetworkImageWrapper {
-  static Widget getImage({required String imgUrl}) {
+  Widget getImage({required String imgUrl}) {
     // return Container();
     return CachedNetworkImage(
       imageUrl: imgUrl,

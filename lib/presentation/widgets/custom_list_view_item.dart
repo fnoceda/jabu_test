@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import '../models/list_view_model.dart';
-import 'cache_network_image_wrapper.dart';
 
 class CustomListItem extends StatelessWidget {
   final ListViewModel item;
@@ -17,7 +16,7 @@ class CustomListItem extends StatelessWidget {
     return ListTile(
       leading: CircleAvatar(
         backgroundColor: Colors.yellow,
-        child: CachedNetworkImageWrapper.getImage(imgUrl: item.imageUrl),
+        child: item.image,
       ),
       title: Text(item.title),
       subtitle: Text(item.subTitle),
