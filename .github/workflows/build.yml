@@ -67,7 +67,7 @@ jobs:
   flutter_build: 
     needs: [flutter_analyze, flutter_test]
     runs-on: macos-latest
-    name: Flutter Build AppBundle
+    name: Flutter Build Debug APK
     steps:
       - uses: actions/checkout@v3
         with:
