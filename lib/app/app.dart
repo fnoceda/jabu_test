@@ -5,11 +5,9 @@ import 'package:jabu_test_bloc/domain/blocs/detail/detail_bloc.dart';
 
 import '../domain/blocs/home/home_bloc_bloc.dart';
 import '../domain/repository/character_repository.dart';
-import '../presentation/pages/cubit/home_cubit_cubit.dart';
+import '../presentation/cubit/home_cubit_cubit.dart';
 import '../presentation/widgets/cache_network_image_wrapper.dart';
 import 'locator.dart';
-
-final GlobalKey<NavigatorState> appNavigatorKey = GlobalKey<NavigatorState>();
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
@@ -39,7 +37,6 @@ class MyApp extends StatelessWidget {
           useMaterial3: true,
         ),
         initialRoute: '/',
-        // navigatorKey: appNavigatorKey,
         onGenerateRoute: AppNavigator.router.generator,
       ),
     );

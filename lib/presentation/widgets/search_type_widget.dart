@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../utils/enums.dart';
-import '../pages/cubit/home_cubit_cubit.dart';
+import '../cubit/home_cubit_cubit.dart';
 
 class SearchTypeWidget extends StatelessWidget {
   final Function(String) onChange;

@@ -57,6 +57,12 @@ void main() {
       await tester.pumpAndSettle();
 
       expect(customListView, findsOneWidget);
+
+      final listTiles = find.byType(ListTile);
+      await tester.tap(listTiles.first);
+      await tester.pumpAndSettle();
+      final detailPage = find.byKey(const ValueKey('DetailPage.key'));
+      expect(detailPage, findsOneWidget);
     });
   });
 }
