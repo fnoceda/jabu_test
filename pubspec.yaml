@@ -1,5 +1,5 @@
-name: jabu_test_bloc
-description: A new Flutter project.
+name: jabu_test
+description: Jabu Test.
 
 publish_to: 'none'
 
@@ -23,14 +23,13 @@ dependencies:
   isar: 3.1.0
   isar_flutter_libs: 3.1.0
   path_provider: ^2.0.15
-  random_name_generator: ^1.1.0
-  uuid: ^3.0.7
   uikit:  
     path: packages/uikit
+
 dev_dependencies:
   bloc_test: ^9.1.1
   build_runner: ^2.4.4
-  change_app_package_name: ^1.1.0 # flutter pub run change_app_package_name:main mx.com.waddi.testapp
+  change_app_package_name: ^1.1.0 # flutter pub run change_app_package_name:main py.com.jabu.flutter_test
   flutter_launcher_icons: ^0.12.0 # flutter pub run flutter_launcher_icons
   flutter_lints: ^2.0.0
   flutter_test:
@@ -38,6 +37,13 @@ dev_dependencies:
   http: ^0.13.0
   isar_generator: 3.1.0
   mockito: ^5.4.0
+
+flutter_icons:
+  android: true
+  ios: true
+  image_path: "assets/images/logo.png"
+  adaptative_icon_background: "assets/images/logo.jpg"
+  remove_alpha_ios: true
 
 flutter:
   assets:

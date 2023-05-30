@@ -1,8 +1,8 @@
 import 'package:dartz/dartz.dart';
 import 'package:flutter/foundation.dart';
-import 'package:jabu_test_bloc/data/models/failure_model.dart';
-import 'package:jabu_test_bloc/data/sources/remote_data/character_remote_data.dart';
-import 'package:jabu_test_bloc/domain/models/character_model.dart';
+import 'package:jabu_test/data/models/failure_model.dart';
+import 'package:jabu_test/data/sources/remote_data/character_remote_data.dart';
+import 'package:jabu_test/domain/models/character_model.dart';
 import 'package:mockito/mockito.dart';
 
 var result = {

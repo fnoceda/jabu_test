@@ -1,4 +1,4 @@
-import 'package:jabu_test_bloc/data/services/check_internet_service.dart';
+import 'package:jabu_test/data/services/check_internet_service.dart';
 import 'package:mockito/mockito.dart';
 
 class MockCheckInternetServiceTrue extends Mock

@@ -2,11 +2,11 @@ import 'dart:io';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:jabu_test_bloc/app/router.dart';
-import 'package:jabu_test_bloc/domain/blocs/home/home_bloc_bloc.dart';
-import 'package:jabu_test_bloc/domain/repository/character_repository.dart';
-import 'package:jabu_test_bloc/presentation/widgets/cache_network_image_wrapper.dart';
-import 'package:jabu_test_bloc/utils/enums.dart';
+import 'package:jabu_test/app/router.dart';
+import 'package:jabu_test/domain/blocs/home/home_bloc_bloc.dart';
+import 'package:jabu_test/domain/repository/character_repository.dart';
+import 'package:jabu_test/presentation/widgets/cache_network_image_wrapper.dart';
+import 'package:jabu_test/utils/enums.dart';
 
 import '../../../app/mock_locator.dart';
 

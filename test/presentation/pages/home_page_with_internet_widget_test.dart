@@ -9,12 +9,12 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:jabu_test_bloc/app/app.dart';
-import 'package:jabu_test_bloc/app/router.dart';
-import 'package:jabu_test_bloc/presentation/widgets/list_builder.dart';
-import 'package:jabu_test_bloc/presentation/widgets/search_input.dart';
-import 'package:jabu_test_bloc/presentation/widgets/search_type_widget.dart';
-import 'package:jabu_test_bloc/presentation/widgets/status_filter_widget.dart';
+import 'package:jabu_test/app/app.dart';
+import 'package:jabu_test/app/router.dart';
+import 'package:jabu_test/presentation/widgets/list_builder.dart';
+import 'package:jabu_test/presentation/widgets/search_input.dart';
+import 'package:jabu_test/presentation/widgets/search_type_widget.dart';
+import 'package:jabu_test/presentation/widgets/status_filter_widget.dart';
 import 'package:mockito/mockito.dart';
 import 'package:http/http.dart' as http;
 import 'package:uikit/widgets/custom_list_view_widget.dart';

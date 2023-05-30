@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:jabu_test_bloc/app/router.dart';
-import 'package:jabu_test_bloc/domain/blocs/detail/detail_bloc.dart';
+import 'package:jabu_test/app/router.dart';
+import 'package:jabu_test/domain/blocs/detail/detail_bloc.dart';
 
 import '../domain/blocs/home/home_bloc_bloc.dart';
 import '../domain/repository/character_repository.dart';
@@ -33,7 +33,7 @@ class MyApp extends StatelessWidget {
       child: MaterialApp(
         title: 'Flutter App',
         theme: ThemeData(
-          colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+          colorScheme: ColorScheme.fromSeed(seedColor: const Color(0xff62cffc)),
           useMaterial3: true,
         ),
         initialRoute: '/',

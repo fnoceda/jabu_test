@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:jabu_test_bloc/utils/extensions/debounce_text_field.dart';
+import 'package:jabu_test/utils/extensions/debounce_text_field.dart';
 
 class SearchInput extends StatelessWidget {
   final TextEditingController searchController;

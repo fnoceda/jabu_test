@@ -1,6 +1,6 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
-import 'package:jabu_test_bloc/domain/models/character_model.dart';
+import 'package:jabu_test/domain/models/character_model.dart';
 import 'package:uikit/models/custom_list_tile_model.dart';
 
 import '../../../presentation/widgets/cache_network_image_wrapper.dart';

@@ -2,9 +2,9 @@ import 'dart:io';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:jabu_test_bloc/app/router.dart';
-import 'package:jabu_test_bloc/presentation/cubit/home_cubit_cubit.dart';
-import 'package:jabu_test_bloc/utils/enums.dart';
+import 'package:jabu_test/app/router.dart';
+import 'package:jabu_test/presentation/cubit/home_cubit_cubit.dart';
+import 'package:jabu_test/utils/enums.dart';
 
 import '../../app/mock_locator.dart';
 

@@ -1,8 +1,8 @@
 import 'package:get_it/get_it.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
 import 'package:isar/isar.dart';
-import 'package:jabu_test_bloc/presentation/widgets/cache_network_image_wrapper.dart';
-import 'package:jabu_test_bloc/utils/config.dart';
+import 'package:jabu_test/presentation/widgets/cache_network_image_wrapper.dart';
+import 'package:jabu_test/utils/config.dart';
 import 'package:path_provider/path_provider.dart';
 
 import '../data/repository/data_sources.dart.dart';

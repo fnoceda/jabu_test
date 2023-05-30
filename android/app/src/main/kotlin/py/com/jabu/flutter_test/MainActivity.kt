@@ -1,4 +1,4 @@
-package com.example.jabu_test_bloc
+package py.com.jabu.flutter_test
 
 import io.flutter.embedding.android.FlutterActivity
 

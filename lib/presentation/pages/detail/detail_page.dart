@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:jabu_test_bloc/domain/blocs/detail/detail_bloc.dart';
-import 'package:jabu_test_bloc/utils/enums.dart';
+import 'package:jabu_test/domain/blocs/detail/detail_bloc.dart';
+import 'package:jabu_test/utils/enums.dart';
 
 import '../../widgets/custom_app_bar.dart';
 import '../../widgets/detail_data_widget.dart';

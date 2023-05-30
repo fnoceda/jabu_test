@@ -848,14 +848,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.2.3"
-  random_name_generator:
-    dependency: "direct main"
-    description:
-      name: random_name_generator
-      sha256: c4b595599be18b754e8b7a44090523eef0174bb4b53f1bc42286d1d2c4f0d25c
-      url: "https://pub.dev"
-    source: hosted
-    version: "1.1.0"
   rxdart:
     dependency: transitive
     description:
@@ -1053,7 +1045,7 @@ packages:
     source: path
     version: "0.0.1"
   uuid:
-    dependency: "direct main"
+    dependency: transitive
     description:
       name: uuid
       sha256: "648e103079f7c64a36dc7d39369cabb358d377078a051d6ae2ad3aa539519313"
