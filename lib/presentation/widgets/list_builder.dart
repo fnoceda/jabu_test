@@ -32,7 +32,6 @@ class ListBuilder extends StatelessWidget {
                 initialData: state.listViewData,
                 loadMoreData: _getMoreData,
                 onItemTap: (String id) {
-                  print('navegate.to => detail/$id');
                   AppNavigator.router.navigateTo(context, 'detail/$id');
                 },
               ),

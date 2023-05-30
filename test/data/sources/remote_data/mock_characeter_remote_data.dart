@@ -162,7 +162,6 @@ class MockCharacterRemoteData extends Mock implements CharacterRemoteData {
     String? filterStatus,
     String? filterStringType,
   }) async {
-    print('entra en MockCharacterRemoteData');
     try {
       List<CharacterModel> rta = [];
 

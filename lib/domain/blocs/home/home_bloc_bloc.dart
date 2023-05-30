@@ -17,7 +17,6 @@ class HomeBlocBloc extends Bloc<HomeBlocEvent, HomeBlocState> {
       : super(HomeBlocState.initial()) {
     on<HomeBlocEvent>((event, emit) {});
     on<HomeBlocHttpLoadingEvent>((event, emit) {
-      print('emit.HomeBlocHttpLoadingEvent');
       emit(state.copyWith(
         requestStatus: RequestStatus.loading,
         listViewData: [],
@@ -30,7 +29,6 @@ class HomeBlocBloc extends Bloc<HomeBlocEvent, HomeBlocState> {
     });
 
     on<HomeBlocHttpFailEvent>((event, emit) {
-      print('emit.HomeBlocHttpFailEvent');
       emit(
         state.copyWith(
           requestStatus: RequestStatus.error,
@@ -40,8 +38,6 @@ class HomeBlocBloc extends Bloc<HomeBlocEvent, HomeBlocState> {
     });
 
     on<HomeBlocHttpSuccessEvent>((event, emit) {
-      print('emit.HomeBlocHttpSuccessEvent');
-
       emit(
         state.copyWith(
             page: event.page,
@@ -50,13 +46,9 @@ class HomeBlocBloc extends Bloc<HomeBlocEvent, HomeBlocState> {
             characters: [...state.characters, ...event.characters],
             listViewData: [...state.listViewData, ...event.viewNewData]),
       );
-
-      print('finish.HomeBlocHttpSuccessEvent ${state.requestStatus}');
     });
 
     on<HomeBlocChangeFilterEvent>((event, emit) {
-      print('emit.HomeBlocChangeFilterEvent');
-
       emit(state.copyWith(
         page: 1,
         filterString: event.filterString ?? state.filterString,
@@ -104,9 +96,7 @@ class HomeBlocBloc extends Bloc<HomeBlocEvent, HomeBlocState> {
     String? filterStatus,
     String? filterStringType,
   }) async {
-    print('getNewData.init');
     add(const HomeBlocHttpLoadingEvent());
-    print('getNewData.loading');
 
     await getData(
       page: 1,
@@ -114,7 +104,6 @@ class HomeBlocBloc extends Bloc<HomeBlocEvent, HomeBlocState> {
       filterString: filterString,
       filterStringType: filterStringType,
     );
-    print('getNewData.finish');
   }
 
   Future<List<CustomListTileModel>> getMoreData() async {
@@ -137,8 +126,6 @@ class HomeBlocBloc extends Bloc<HomeBlocEvent, HomeBlocState> {
   }) async {
     List<CustomListTileModel> rta = [];
 
-    print('getData.init');
-
     var result = await repo.getCharacterList(
       page: page,
       filterStatus: filterStatus,
@@ -146,16 +133,10 @@ class HomeBlocBloc extends Bloc<HomeBlocEvent, HomeBlocState> {
       filterStringType: filterStringType,
     );
 
-    print('getData.repoCalled');
-
     rta = result.fold((l) {
-      print('getData.repoFail');
-
       add(HomeBlocHttpFailEvent(errorMessage: l.message));
       return [];
     }, (r) {
-      print('getData.repoSuccess');
-
       List<CustomListTileModel> newViewData = r.map((e) {
         return CustomListTileModel(
           id: e.id,

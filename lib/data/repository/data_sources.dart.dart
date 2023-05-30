@@ -27,9 +27,7 @@ class CharacterDatsources implements CharacterRepository {
     String? filterStringType,
   }) async {
     try {
-      print('entra en CharacterDatsources');
       bool hasInternet = await checkInternetService.checkInternet();
-      print('tiene internet $hasInternet');
       Either<FailureModel, List<CharacterModel>> result;
       if (hasInternet) {
         result = await characterRemoteData.getCharacterList(

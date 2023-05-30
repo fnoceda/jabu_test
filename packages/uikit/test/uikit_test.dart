@@ -1,10 +1,8 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:uikit/uikit.dart';
 
 Future<List<CustomListTileModel>> getMoreData(BuildContext context) async {
-  print('getMoreData.called!');
   await Future.delayed(const Duration(milliseconds: 1000));
   List<CustomListTileModel> result = [];
 
@@ -19,7 +17,6 @@ Future<List<CustomListTileModel>> getMoreData(BuildContext context) async {
       ),
     );
   }
-  print('getMoreData.finish!');
 
   return result;
 }
@@ -80,9 +77,7 @@ class TestWidget extends StatelessWidget {
         body: CustomListView(
           initialData: data,
           loadMoreData: loadMoreData,
-          onItemTap: (String id) {
-            print('id=>$id');
-          },
+          onItemTap: (String id) {},
         ),
       ),
     );

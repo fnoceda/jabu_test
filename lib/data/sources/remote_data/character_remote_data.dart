@@ -17,8 +17,6 @@ class CharacterRemoteData implements ICharacterRemoteRepository {
     String? filterStatus,
     String? filterStringType,
   }) async {
-    print('entra en CharacterRemoteService');
-
     try {
       List<CharacterModel> rta = [];
 

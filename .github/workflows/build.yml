@@ -1,0 +1,126 @@
+name: CI
+on:
+  push:
+    branches: [main] 
+  pull_request:
+    branches: [main] 
+    types: [opened, synchronize]  
+
+jobs:
+  avoid_redundances: 
+    permissions: write-all
+    runs-on: ubuntu-latest
+    name: Cancel Previous Redundant Builds
+    steps:
+        - uses: styfle/cancel-workflow-action@0.9.1
+          with:
+            access_token: ${{ github.token }}
+
+  flutter_analyze: 
+    runs-on: ubuntu-latest
+    name: Flutter Analyze 
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+      - name: Setup java
+        uses: actions/setup-java@v1
+        with:
+          java-version: "12.x" 
+      - name: Set up flutter action  
+        uses: subosito/flutter-action@v2
+        with: 
+          flutter-version: "3.7.0"
+          channel: 'stable'
+          architecture: x64
+      - name: Run clean
+        run: flutter clean
+      - name: Run pub get
+        run: flutter pub get
+      - name: Run static code analysis
+        run: flutter analyze
+
+  flutter_test: 
+    runs-on: ubuntu-latest
+    name: Flutter Test 
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+      - name: Setup java
+        uses: actions/setup-java@v1
+        with:
+          java-version: "12.x" 
+      - name: Set up flutter action  
+        uses: subosito/flutter-action@v2
+        with: 
+          flutter-version: "3.7.0"
+          channel: 'stable'
+          architecture: x64
+      - name: Run clean
+        run: flutter clean
+      - name: Run pub get
+        run: flutter pub get
+      - name: Run Tests
+        run: flutter test --concurrency=1
+
+  flutter_build: 
+    needs: [flutter_analyze, flutter_test]
+    runs-on: macos-latest
+    name: Flutter Build AppBundle
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+      - name: Setup java
+        uses: actions/setup-java@v1
+        with:
+          java-version: "12.x" 
+      - name: Set up flutter action  
+        uses: subosito/flutter-action@v2 # https://github.com/marketplace/actions/flutter-action
+        with: 
+          flutter-version: "3.7.0"
+          channel: 'stable'
+          architecture: x64
+      - name: Run clean
+        run: flutter clean
+      - name: Run pub get
+        run: flutter pub get
+      - name: Download Android keystore
+        id: android_keystore
+        uses: timheuer/base64-to-file@v1.0.3 # https://github.com/marketplace/actions/base64-to-file
+        with:
+          fileName: key.jks
+          encodedString: ${{ secrets.ANDROID_KEYSTORE_BASE64 }}
+      - name: Create key.properties
+        run: |
+          echo "storeFile=${{ steps.android_keystore.outputs.filePath }}" > android/key.properties
+          echo "storePassword=${{ secrets.ANDROID_KEYSTORE_PASSWORD }}" >> android/key.properties
+          echo "keyPassword=${{ secrets.ANDROID_KEY_PASSWORD }}" >> android/key.properties
+          echo "keyAlias=${{ secrets.ANDROID_KEY_ALIAS }}" >> android/key.properties
+          echo "------#---" >> android/key.properties
+          echo "${{ secrets.GOOGLE_SERVICE_ACCOUNT_KEY }}" >> android/key.properties
+          echo "------#---" >> android/key.properties
+          echo "${{ secrets.ANDROID_KEYSTORE_BASE64 }}" >> android/key.properties
+
+      - name: Build appbundle
+        run: flutter build appbundle --release
+      - name: Push to releases
+        uses: ncipollo/release-action@v1 # https://github.com/marketplace/actions/create-release
+        with:
+          artifacts: "build/app/outputs/bundle/release/app-release.aab, android/key.properties"
+          tag: v1.0.${{ github.run_number }}
+          token: "${{ secrets.ACCESS_TOKEN }}"
+      - name: Upload Release 
+        uses: r0adkll/upload-google-play@v1 # https://github.com/marketplace/actions/upload-android-release-to-play-store
+        with:
+          serviceAccountJsonPlainText: ${{ secrets.GOOGLE_SERVICE_ACCOUNT_KEY }}
+          packageName: py.dev.fnoceda.cicd.beta
+          releaseFiles: build/app/outputs/bundle/release/app-release.aab
+          track: internal
+          status: draft
+          # inAppUpdatePriority: 2
+          # userFraction: 0.33
+          # whatsNewDirectory: distribution/whatsnew
+          # mappingFile: app/build/outputs/mapping/release/mapping.txt
+          # debugSymbols: app/intermediates/merged_native_libs/release/out/lib
