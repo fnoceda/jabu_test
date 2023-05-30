@@ -93,4 +93,6 @@ jobs:
         with:
           artifacts: "build/app/outputs/flutter-apk/app-debug.apk"
           tag: v1.0.${{ github.run_number }}
-          token: "${{ secrets.TOKEN }}"
+          token: "${{ secrets.INTEGRATION_TOKEN }}"
+
+
