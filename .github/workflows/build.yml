@@ -86,41 +86,11 @@ jobs:
         run: flutter clean
       - name: Run pub get
         run: flutter pub get
-      - name: Download Android keystore
-        id: android_keystore
-        uses: timheuer/base64-to-file@v1.0.3 # https://github.com/marketplace/actions/base64-to-file
-        with:
-          fileName: key.jks
-          encodedString: ${{ secrets.ANDROID_KEYSTORE_BASE64 }}
-      - name: Create key.properties
-        run: |
-          echo "storeFile=${{ steps.android_keystore.outputs.filePath }}" > android/key.properties
-          echo "storePassword=${{ secrets.ANDROID_KEYSTORE_PASSWORD }}" >> android/key.properties
-          echo "keyPassword=${{ secrets.ANDROID_KEY_PASSWORD }}" >> android/key.properties
-          echo "keyAlias=${{ secrets.ANDROID_KEY_ALIAS }}" >> android/key.properties
-          echo "------#---" >> android/key.properties
-          echo "${{ secrets.GOOGLE_SERVICE_ACCOUNT_KEY }}" >> android/key.properties
-          echo "------#---" >> android/key.properties
-          echo "${{ secrets.ANDROID_KEYSTORE_BASE64 }}" >> android/key.properties
-
-      - name: Build appbundle
-        run: flutter build appbundle --release
+      - name: Build apk
+        run: flutter build apk --debug
       - name: Push to releases
         uses: ncipollo/release-action@v1 # https://github.com/marketplace/actions/create-release
         with:
-          artifacts: "build/app/outputs/bundle/release/app-release.aab, android/key.properties"
+          artifacts: "build/app/outputs/flutter-apk/app-debug.apk"
           tag: v1.0.${{ github.run_number }}
           token: "${{ secrets.ACCESS_TOKEN }}"
-      - name: Upload Release 
-        uses: r0adkll/upload-google-play@v1 # https://github.com/marketplace/actions/upload-android-release-to-play-store
-        with:
-          serviceAccountJsonPlainText: ${{ secrets.GOOGLE_SERVICE_ACCOUNT_KEY }}
-          packageName: py.dev.fnoceda.cicd.beta
-          releaseFiles: build/app/outputs/bundle/release/app-release.aab
-          track: internal
-          status: draft
-          # inAppUpdatePriority: 2
-          # userFraction: 0.33
-          # whatsNewDirectory: distribution/whatsnew
-          # mappingFile: app/build/outputs/mapping/release/mapping.txt
-          # debugSymbols: app/intermediates/merged_native_libs/release/out/lib
