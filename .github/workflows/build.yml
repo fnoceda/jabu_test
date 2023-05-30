@@ -93,6 +93,6 @@ jobs:
         with:
           artifacts: "build/app/outputs/flutter-apk/*.apk"
           tag: v1.0.${{ github.run_number }}
-          token: "${{ secrets.INTEGRATION_TOKEN }}"
+          token: "${{ secrets.ARTIFACT_TOKEN }}"
 
 # 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
