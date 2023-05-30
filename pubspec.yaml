@@ -25,7 +25,8 @@ dependencies:
   path_provider: ^2.0.15
   random_name_generator: ^1.1.0
   uuid: ^3.0.7
-
+  uikit:  
+    path: packages/uikit
 dev_dependencies:
   bloc_test: ^9.1.1
   build_runner: ^2.4.4

@@ -5,7 +5,6 @@ class MockCheckInternetServiceTrue extends Mock
     implements CheckInternetService {
   @override
   Future<bool> checkInternet() async {
-    await Future.delayed(const Duration(milliseconds: 100));
     return true;
   }
 }
@@ -14,7 +13,6 @@ class MockCheckInternetServiceFalse extends Mock
     implements CheckInternetService {
   @override
   Future<bool> checkInternet() async {
-    await Future.delayed(const Duration(milliseconds: 100));
     return false;
   }
 }

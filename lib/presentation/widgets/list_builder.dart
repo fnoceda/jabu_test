@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:uikit/models/list_view_model.dart';
+import 'package:uikit/widgets/custom_list_view_widget.dart';
 
 import '../../domain/blocs/home/home_bloc_bloc.dart';
 import '../../router.dart';
 import '../../utils/enums.dart';
-import '../models/list_view_model.dart';
-import 'custom_list_view_widget.dart';
 
 class ListBuilder extends StatelessWidget {
   const ListBuilder({super.key});
@@ -22,9 +22,9 @@ class ListBuilder extends StatelessWidget {
         switch (state.requestStatus) {
           case RequestStatus.none:
           case RequestStatus.loading:
-            return const Text('Loading');
+            return const Text(key: Key('Loading.Key'), 'Loading');
           case RequestStatus.error:
-            return const Text('Error');
+            return const Text(key: Key('Error.Key'), 'Error');
           case RequestStatus.more:
           case RequestStatus.success:
             return Expanded(

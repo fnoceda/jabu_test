@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:jabu_test_bloc/domain/blocs/detail/detail_bloc.dart';
-import 'package:jabu_test_bloc/presentation/models/list_view_model.dart';
 import 'package:jabu_test_bloc/utils/enums.dart';
+import 'package:uikit/models/list_view_model.dart';
 
 class DetailPage extends StatelessWidget {
   final String id;

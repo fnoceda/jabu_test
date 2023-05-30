@@ -6,8 +6,6 @@ import 'package:jabu_test_bloc/utils/config.dart';
 import 'package:path_provider/path_provider.dart';
 
 import 'data/repository/data_sources.dart.dart';
-import 'data/services/character_local_service.dart';
-import 'data/services/character_remote_service.dart';
 import 'data/services/check_internet_service.dart';
 import 'data/sources/local_data/character_local_data.dart';
 import 'data/sources/local_data/collections/character_collection.dart';
@@ -24,16 +22,19 @@ class Locator {
         await Isar.open([CharacterCollectionSchema], directory: dir.path);
     CheckInternetService checkInternetService = CheckInternetService();
 
-    CharacterLocalData characterLocalData = CharacterLocalData(
-        characterLocalService: CharacterLocalService(isar: isar));
+    // CharacterLocalData characterLocalData = CharacterLocalData(characterLocalService: CharacterLocalService(isar: isar));
+
+    CharacterLocalData characterLocalData = CharacterLocalData(isar: isar);
+
     GraphQLClient graphQLClient = GraphQLClient(
       cache: GraphQLCache(store: HiveStore()),
       link: HttpLink(AppConfig.baseUrl),
     );
 
-    CharacterRemoteData characterRemoteData = CharacterRemoteData(
-        characterRemoteService:
-            CharacterRemoteService(graphQLClient: graphQLClient));
+    // CharacterRemoteData characterRemoteData = CharacterRemoteData( characterRemoteService: CharacterRemoteService(graphQLClient: graphQLClient));
+
+    CharacterRemoteData characterRemoteData =
+        CharacterRemoteData(graphQLClient: graphQLClient);
 
     CharacterRepository characterRepository = CharacterDatsources(
       checkInternetService: checkInternetService,

@@ -1,7 +1,7 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
+import 'package:uikit/models/list_view_model.dart';
 
-import '../../../presentation/models/list_view_model.dart';
 import '../../../presentation/widgets/cache_network_image_wrapper.dart';
 import '../../../utils/enums.dart';
 import '../../models/character_model.dart';
