@@ -5,10 +5,10 @@ import 'package:jabu_test_bloc/data/sources/remote_data/character_remote_data.da
 import 'package:jabu_test_bloc/domain/repository/character_repository.dart';
 import 'package:jabu_test_bloc/presentation/widgets/cache_network_image_wrapper.dart';
 
-import 'data/sources/remote_data/mock_characeter_remote_data.dart';
-import 'data/sources/local_data/mock_character_local_data.dart';
-import 'data/services/mock_check_internet_services.dart';
-import 'presentation/widgets/cache_network_image_wrapper.dart';
+import '../data/sources/remote_data/mock_characeter_remote_data.dart';
+import '../data/sources/local_data/mock_character_local_data.dart';
+import '../data/services/mock_check_internet_services.dart';
+import '../presentation/widgets/cache_network_image_wrapper.dart';
 
 class LocatorWithInternet {
   const LocatorWithInternet._();

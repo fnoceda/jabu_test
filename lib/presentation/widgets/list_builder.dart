@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:uikit/models/list_view_model.dart';
+import 'package:uikit/models/custom_list_tile_model.dart';
 import 'package:uikit/widgets/custom_list_view_widget.dart';
 
+import '../../app/router.dart';
 import '../../domain/blocs/home/home_bloc_bloc.dart';
-import '../../router.dart';
 import '../../utils/enums.dart';
 
 class ListBuilder extends StatelessWidget {

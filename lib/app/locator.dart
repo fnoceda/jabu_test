@@ -5,12 +5,12 @@ import 'package:jabu_test_bloc/presentation/widgets/cache_network_image_wrapper.
 import 'package:jabu_test_bloc/utils/config.dart';
 import 'package:path_provider/path_provider.dart';
 
-import 'data/repository/data_sources.dart.dart';
-import 'data/services/check_internet_service.dart';
-import 'data/sources/local_data/character_local_data.dart';
-import 'data/sources/local_data/collections/character_collection.dart';
-import 'data/sources/remote_data/character_remote_data.dart';
-import 'domain/repository/character_repository.dart';
+import '../data/repository/data_sources.dart.dart';
+import '../data/services/check_internet_service.dart';
+import '../data/sources/local_data/character_local_data.dart';
+import '../data/sources/local_data/collections/character_collection.dart';
+import '../data/sources/remote_data/character_remote_data.dart';
+import '../domain/repository/character_repository.dart';
 
 class Locator {
   const Locator._();

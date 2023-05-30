@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
-import '../models/list_view_model.dart';
 
-class CustomListItem extends StatelessWidget {
+import '../models/custom_list_tile_model.dart';
+
+class CustomListTileItem extends StatelessWidget {
   final CustomListTileModel item;
   final Function(String)? onItemTap;
 
-  const CustomListItem({
+  const CustomListTileItem({
     super.key,
     required this.item,
     this.onItemTap,

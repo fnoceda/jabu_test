@@ -1,8 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-import '../models/list_view_model.dart';
-import 'custom_list_view_item.dart';
+import '../models/custom_list_tile_model.dart';
+import 'custom_list_tile_item_widget.dart';
 
 class CustomListView extends StatefulWidget {
   final List<CustomListTileModel> initialData;
@@ -71,7 +71,7 @@ class _CustomListViewState extends State<CustomListView> {
             itemCount: data.length,
             separatorBuilder: (_, __) => const Divider(),
             itemBuilder: (_, i) {
-              return CustomListItem(
+              return CustomListTileItem(
                 item: data[i],
                 onItemTap: widget.onItemTap,
               );

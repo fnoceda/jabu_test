@@ -9,16 +9,17 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:jabu_test_bloc/app.dart';
+import 'package:jabu_test_bloc/app/app.dart';
+import 'package:jabu_test_bloc/app/router.dart';
 import 'package:jabu_test_bloc/presentation/widgets/list_builder.dart';
 import 'package:jabu_test_bloc/presentation/widgets/search_input.dart';
 import 'package:jabu_test_bloc/presentation/widgets/search_type_widget.dart';
 import 'package:jabu_test_bloc/presentation/widgets/status_filter_widget.dart';
-import 'package:jabu_test_bloc/router.dart';
 import 'package:mockito/mockito.dart';
 import 'package:http/http.dart' as http;
 import 'package:uikit/widgets/custom_list_view_widget.dart';
-import 'mock_locator.dart';
+
+import '../../app/mock_locator.dart';
 
 class MockHttpClient extends Mock implements http.Client {
   Future<http.Response> gets(dynamic uri, {dynamic headers}) {
@@ -28,9 +29,10 @@ class MockHttpClient extends Mock implements http.Client {
 }
 
 void main() {
+  TestWidgetsFlutterBinding.ensureInitialized();
   setUp(() {
     AppNavigator.configureRoutes();
-    LocatorWithInternet.setUpLocators();
+    LocatorWithOutInternet.setUpLocators();
     HttpOverrides.global = null;
     WidgetsFlutterBinding.ensureInitialized();
   });
@@ -39,31 +41,20 @@ void main() {
       await tester.pumpWidget(const MyApp());
 
       final scafoldHome = find.byKey(const ValueKey('ScafoldHomePage.Key'));
-      expect(scafoldHome, findsOneWidget);
-      await tester.pumpAndSettle();
-
-      final errorText = find.byKey(const ValueKey('Error.Key'));
       final loadingText = find.byKey(const ValueKey('Loading.Key'));
-
       final searchTypeWidget = find.byType(SearchTypeWidget);
       final searchInput = find.byType(SearchInput);
       final statusFilterWidget = find.byType(StatusFilterWidget);
       final listBuilder = find.byType(ListBuilder);
       final customListView = find.byType(CustomListView);
 
+      expect(scafoldHome, findsOneWidget);
+      expect(loadingText, findsOneWidget);
       expect(searchTypeWidget, findsOneWidget);
       expect(searchInput, findsOneWidget);
       expect(statusFilterWidget, findsOneWidget);
       expect(listBuilder, findsOneWidget);
-      // expect(loadingText, findsOneWidget);
-      // await tester.pumpAndSettle();
-      // await tester.pumpAndSettle();
-      // await tester.pumpAndSettle();
-      // await tester.pumpAndSettle();
-      // await tester.pumpAndSettle();
-      // await tester.pumpAndSettle();
-      // await tester.pumpAndSettle();
-      // expect(errorText, findsOneWidget);
+      await tester.pumpAndSettle();
 
       expect(customListView, findsOneWidget);
     });

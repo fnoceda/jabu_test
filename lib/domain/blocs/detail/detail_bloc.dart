@@ -1,6 +1,6 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
-import 'package:uikit/models/list_view_model.dart';
+import 'package:uikit/models/custom_list_tile_model.dart';
 
 import '../../../presentation/widgets/cache_network_image_wrapper.dart';
 import '../../../utils/enums.dart';
@@ -37,18 +37,12 @@ class DetailBloc extends Bloc<DetailEvent, DetailState> {
   }
 
   Future<void> getCharacter({required String id}) async {
-    // print('getCharacter.1');
     add(const DetailFechthingEvent());
     var result = await repo.getCharacterById(id: id);
-    // print('getCharacter.2');
 
     result.fold((l) {
-      // print('fail');
-
       add(const DetailFechtFailEvent(errorMessage: 'Fail retriving data'));
     }, (r) {
-      // print('success');
-
       CustomListTileModel viewNewData = CustomListTileModel(
         id: r.id,
         title: r.name,
@@ -61,6 +55,5 @@ class DetailBloc extends Bloc<DetailEvent, DetailState> {
         viewNewData: viewNewData,
       ));
     });
-    // print('getCharacter.3');
   }
 }
