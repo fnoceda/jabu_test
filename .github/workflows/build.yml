@@ -1,97 +1,97 @@
-# name: CI
-# on:
-#   push:
-#     branches: [main] 
-#   pull_request:
-#     branches: [main] 
-#     types: [opened, synchronize]  
+name: CI
+on:
+  push:
+    branches: [main] 
+  pull_request:
+    branches: [main] 
+    types: [opened, synchronize]  
 
-# jobs:
-#   avoid_redundances: 
-#     permissions: write-all
-#     runs-on: ubuntu-latest
-#     name: Cancel Previous Redundant Builds
-#     steps:
-#         - uses: styfle/cancel-workflow-action@0.9.1
-#           with:
-#             access_token: ${{ github.token }}
+jobs:
+  avoid_redundances: 
+    permissions: write-all
+    runs-on: ubuntu-latest
+    name: Cancel Previous Redundant Builds
+    steps:
+        - uses: styfle/cancel-workflow-action@0.9.1
+          with:
+            access_token: ${{ github.token }}
 
-#   flutter_analyze: 
-#     runs-on: ubuntu-latest
-#     name: Flutter Analyze 
-#     steps:
-#       - uses: actions/checkout@v3
-#         with:
-#           fetch-depth: 0
-#       - name: Setup java
-#         uses: actions/setup-java@v1
-#         with:
-#           java-version: "12.x" 
-#       - name: Set up flutter action  
-#         uses: subosito/flutter-action@v2
-#         with: 
-#           flutter-version: "3.10.1"
-#           channel: 'stable'
-#           architecture: x64
-#       - name: Run clean
-#         run: flutter clean
-#       - name: Run pub get
-#         run: flutter pub get
-#       - name: Run static code analysis
-#         run: flutter analyze
+  flutter_analyze: 
+    runs-on: ubuntu-latest
+    name: Flutter Analyze 
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+      - name: Setup java
+        uses: actions/setup-java@v1
+        with:
+          java-version: "12.x" 
+      - name: Set up flutter action  
+        uses: subosito/flutter-action@v2
+        with: 
+          flutter-version: "3.10.1"
+          channel: 'stable'
+          architecture: x64
+      - name: Run clean
+        run: flutter clean
+      - name: Run pub get
+        run: flutter pub get
+      - name: Run static code analysis
+        run: flutter analyze
 
-#   flutter_test: 
-#     runs-on: ubuntu-latest
-#     name: Flutter Test 
-#     steps:
-#       - uses: actions/checkout@v3
-#         with:
-#           fetch-depth: 0
-#       - name: Setup java
-#         uses: actions/setup-java@v1
-#         with:
-#           java-version: "12.x" 
-#       - name: Set up flutter action  
-#         uses: subosito/flutter-action@v2
-#         with: 
-#           flutter-version: "3.10.1"
-#           channel: 'stable'
-#           architecture: x64
-#       - name: Run clean
-#         run: flutter clean
-#       - name: Run pub get
-#         run: flutter pub get
-#       - name: Run Tests
-#         run: flutter test --concurrency=1
+  flutter_test: 
+    runs-on: ubuntu-latest
+    name: Flutter Test 
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+      - name: Setup java
+        uses: actions/setup-java@v1
+        with:
+          java-version: "12.x" 
+      - name: Set up flutter action  
+        uses: subosito/flutter-action@v2
+        with: 
+          flutter-version: "3.10.1"
+          channel: 'stable'
+          architecture: x64
+      - name: Run clean
+        run: flutter clean
+      - name: Run pub get
+        run: flutter pub get
+      - name: Run Tests
+        run: flutter test --concurrency=1
 
-#   flutter_build: 
-#     needs: [flutter_analyze, flutter_test]
-#     runs-on: macos-latest
-#     name: Flutter Build Debug APK
-#     steps:
-#       - uses: actions/checkout@v3
-#         with:
-#           fetch-depth: 0
-#       - name: Setup java
-#         uses: actions/setup-java@v1
-#         with:
-#           java-version: "12.x" 
-#       - name: Set up flutter action  
-#         uses: subosito/flutter-action@v2 # https://github.com/marketplace/actions/flutter-action
-#         with: 
-#           flutter-version: "3.10.1"
-#           channel: 'stable'
-#           architecture: x64
-#       - name: Run clean
-#         run: flutter clean
-#       - name: Run pub get
-#         run: flutter pub get
-#       - name: Build apk
-#         run: flutter build apk --debug
-#       - name: Push to releases
-#         uses: ncipollo/release-action@v1 # https://github.com/marketplace/actions/create-release
-#         with:
-#           artifacts: "build/app/outputs/flutter-apk/app-debug.apk"
-#           tag: v1.0.${{ github.run_number }}
-#           token: "${{ secrets.TEMPORAL_TOKEN }}"
+  flutter_build: 
+    needs: [flutter_analyze, flutter_test]
+    runs-on: macos-latest
+    name: Flutter Build Debug APK
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+      - name: Setup java
+        uses: actions/setup-java@v1
+        with:
+          java-version: "12.x" 
+      - name: Set up flutter action  
+        uses: subosito/flutter-action@v2 # https://github.com/marketplace/actions/flutter-action
+        with: 
+          flutter-version: "3.10.1"
+          channel: 'stable'
+          architecture: x64
+      - name: Run clean
+        run: flutter clean
+      - name: Run pub get
+        run: flutter pub get
+      - name: Build apk
+        run: flutter build apk --debug
+      - name: Push to releases
+        uses: ncipollo/release-action@v1 # https://github.com/marketplace/actions/create-release
+        with:
+          artifacts: "build/app/outputs/flutter-apk/app-debug.apk"
+          tag: v1.0.${{ github.run_number }}
+          token: "${{ secrets.TEMPORAL_TOKEN }}"
 
