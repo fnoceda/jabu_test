@@ -25,7 +25,7 @@ void main() {
     );
   });
 
-  group('Home Bloc Test', () {
+  group('Home Bloc Test > ', () {
     test('Init', () async {
       expect(bloc.state.requestStatus, RequestStatus.loading);
       await Future.delayed(const Duration(milliseconds: 100));

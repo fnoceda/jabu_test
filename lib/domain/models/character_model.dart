@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 import 'package:equatable/equatable.dart';
 
 enum CharacterStatus { alive, dead, otro }
@@ -22,25 +20,9 @@ class CharacterModel extends Equatable {
     required this.image,
     required this.species,
   });
-  @override
+  @override // coverage:ignore-line
   List<Object> get props {
-    return [
-      id,
-      name,
-      status,
-      image,
-      species,
-    ];
-  }
-
-  Map<String, dynamic> toMap() {
-    return <String, dynamic>{
-      'id': id,
-      'name': name,
-      'status': status.name,
-      'image': image,
-      'species': species,
-    };
+    return [id, name, status, image, species];
   }
 
   factory CharacterModel.fromMap(Map<String, dynamic> map) {
@@ -54,15 +36,10 @@ class CharacterModel extends Equatable {
     );
   }
 
-  String toJson() => json.encode(toMap());
-
-  factory CharacterModel.fromJson(String source) =>
-      CharacterModel.fromMap(json.decode(source) as Map<String, dynamic>);
-
-  @override
+  @override // coverage:ignore-line
   bool get stringify => true;
 
-  @override
+  @override // coverage:ignore-line
   String toString() {
     return "CharacterModel(id: $id, name: $name, status: $status, species: $species, image: $image  )";
   }

@@ -99,10 +99,18 @@ void main() {
       // await tester.tap(buttonSegmentList.at(1));
       // await tester.pumpAndSettle();
       // expect(buttonSegmentWL2, matcher);
+      //scroll
+      final firstItem = find.text('Name 0');
+      expect(firstItem, findsWidgets);
+      await tester.drag(find.byType(ListView), const Offset(0.0, -10000));
+      await tester.pumpAndSettle();
+      final lastItem = find.text('Name 19');
+      expect(lastItem, findsWidgets);
+      await tester.pump(const Duration(milliseconds: 500));
 
       // // navegacion
       final listTiles = find.byType(ListTile);
-      await tester.tap(listTiles.first);
+      await tester.tap(listTiles.last);
       await tester.pumpAndSettle();
       final detailPage = find.byKey(const ValueKey('DetailPage.key'));
       expect(detailPage, findsOneWidget);
