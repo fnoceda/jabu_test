@@ -12,13 +12,13 @@ Además puede descargar la app-debug más arriba seleccionando la opción de Rel
         <th>iOS view</th>
     </tr>
     <tr>
-        <td><img src="doc/android.png" width="200"></td>
-        <td><img src="doc/ios.png" width="200"></td>
+        <td><img src="doc/android.png" width="300"></td>
+        <td><img src="doc/ios.png" width="300"></td>
     </tr>
     <tr>
         <th colspan="2">Coverage</th>
     </tr>
      <tr>
-        <td colspan="2"><img src="doc/coverage.png" width="400"></td>
+        <td colspan="2"><img src="doc/coverage.png" width="600"></td>
     </tr>
 </table>
