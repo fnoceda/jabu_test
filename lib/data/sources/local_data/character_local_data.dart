@@ -1,3 +1,5 @@
+// coverage:ignore-file
+
 import 'package:dartz/dartz.dart';
 import 'package:flutter/foundation.dart';
 import 'package:isar/isar.dart';
