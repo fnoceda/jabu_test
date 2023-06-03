@@ -1,3 +1,5 @@
+// coverage:ignore-file
+
 import 'package:get_it/get_it.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
 import 'package:isar/isar.dart';
@@ -13,16 +15,15 @@ import '../data/sources/remote_data/character_remote_data.dart';
 import '../domain/repository/character_repository.dart';
 
 class Locator {
-  const Locator._(); // coverage:ignore-line
+  const Locator._();
   static final sl = GetIt.instance;
 
   static setUpLocators() async {
+    // coverage:ignore-start
     final dir = await getApplicationSupportDirectory();
     final isar =
         await Isar.open([CharacterCollectionSchema], directory: dir.path);
     CheckInternetService checkInternetService = CheckInternetService();
-
-    // CharacterLocalData characterLocalData = CharacterLocalData(characterLocalService: CharacterLocalService(isar: isar));
 
     CharacterLocalData characterLocalData = CharacterLocalData(isar: isar);
 
@@ -30,8 +31,6 @@ class Locator {
       cache: GraphQLCache(store: HiveStore()),
       link: HttpLink(AppConfig.baseUrl),
     );
-
-    // CharacterRemoteData characterRemoteData = CharacterRemoteData( characterRemoteService: CharacterRemoteService(graphQLClient: graphQLClient));
 
     CharacterRemoteData characterRemoteData =
         CharacterRemoteData(graphQLClient: graphQLClient);
