@@ -60,7 +60,7 @@ void main() {
       expect(customListView, findsOneWidget);
 
       final searchInput2 = find.byKey(const Key('SearchKey'));
-      print(searchInput2);
+      // print(searchInput2);
 
       expect(searchInput2, findsOneWidget);
 
@@ -87,7 +87,7 @@ void main() {
 
       final segmentedButton = find.byType(SegmentedButton<DataFilter>);
       expect(segmentedButton, findsOneWidget);
-      final segmentedButtonW = tester.widget(segmentedButton);
+      // final segmentedButtonW = tester.widget(segmentedButton);
 
       //  expect(segmentedButtonW., true);
 

@@ -1,7 +1,5 @@
 import 'dart:io';
 
-import 'package:flutter/foundation.dart';
-
 class CheckInternetService {
   Future<bool> checkInternet() async {
     bool rta = false;

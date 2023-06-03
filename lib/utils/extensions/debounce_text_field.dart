@@ -19,8 +19,6 @@ extension DeboucedTextField on TextFormField {
       onChanged: (value) {
         if (debounce?.isActive ?? false) debounce!.cancel();
         debounce = Timer(duration, () {
-          print('changed!');
-
           onChanged(value);
         });
       },
