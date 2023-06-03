@@ -15,4 +15,10 @@ Además puede descargar la app-debug más arriba seleccionando la opción de Rel
         <td><img src="doc/android.png" width="200"></td>
         <td><img src="doc/ios.png" width="200"></td>
     </tr>
+    <tr>
+        <th colspan="2">Coverage</th>
+    </tr>
+     <tr>
+        <td><img src="doc/coverage.png" width="400"></td>
+    </tr>
 </table>
