@@ -24,7 +24,8 @@ class ListBuilder extends StatelessWidget {
           case RequestStatus.loading:
             return const Text(key: Key('Loading.Key'), 'Loading');
           case RequestStatus.error:
-            return const Text(key: Key('Error.Key'), 'Error');
+            return Text(
+                key: const Key('Error.Key'), state.errorMessage ?? 'Error');
           case RequestStatus.more:
           case RequestStatus.success:
             return Expanded(

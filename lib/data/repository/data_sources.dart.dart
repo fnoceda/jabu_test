@@ -1,5 +1,4 @@
 import 'package:dartz/dartz.dart';
-import 'package:flutter/foundation.dart';
 
 import '../../domain/models/character_model.dart';
 import '../../domain/repository/character_repository.dart';
@@ -50,12 +49,8 @@ class CharacterDatsources implements CharacterRepository {
         );
       }
       return result;
-    } catch (e, s) {
-      if (kDebugMode) {
-        print(e);
-        print(s);
-      }
-      return const Left(FailureModel(status: 500, message: 'Unimplemented'));
+    } catch (e) {
+      return const Left(FailureModel(status: 500, message: 'Unknow Error'));
     }
   }
 

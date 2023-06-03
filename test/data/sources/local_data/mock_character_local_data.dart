@@ -15,6 +15,8 @@ class MockCharacterLocalData extends Mock implements CharacterLocalData {
     try {
       List<CharacterModel> rta = [];
 
+      filterStringType = filterStringType?.trim() ?? '';
+
       if (filterStringType != '' &&
           filterStringType != 'name' &&
           filterStringType != 'species') {
