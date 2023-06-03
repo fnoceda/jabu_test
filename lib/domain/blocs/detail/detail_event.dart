@@ -3,8 +3,8 @@ part of 'detail_bloc.dart';
 abstract class DetailEvent extends Equatable {
   const DetailEvent();
 
-  @override
-  List<Object> get props => [];
+  @override // coverage:ignore-line
+  List<Object> get props => []; // coverage:ignore-line
 }
 
 class DetailFechtFailEvent extends DetailEvent {

@@ -59,5 +59,17 @@ void main() {
       expect(bloc.state.filterString, 'Alien');
       expect(bloc.state.filterStringType, 'species');
     });
+
+    test('Failure Test', () async {
+      expect(bloc.state.filterString, null);
+      expect(bloc.state.filterStringType, 'name');
+      await bloc.getNewData(
+        filterString: 'Alien',
+        filterStringType: 'badfilter',
+      );
+      await Future.delayed(const Duration(milliseconds: 100));
+      expectLater(bloc.state.requestStatus, RequestStatus.error);
+      expect(bloc.state.errorMessage, 'Bad Filter');
+    });
   });
 }

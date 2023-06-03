@@ -15,6 +15,12 @@ class MockCharacterLocalData extends Mock implements CharacterLocalData {
     try {
       List<CharacterModel> rta = [];
 
+      if (filterStringType != '' &&
+          filterStringType != 'name' &&
+          filterStringType != 'species') {
+        return const Left(FailureModel(status: 500, message: 'Bad Filter'));
+      }
+
       for (var i = 0; i < 20; i++) {
         rta.add(
           CharacterModel(

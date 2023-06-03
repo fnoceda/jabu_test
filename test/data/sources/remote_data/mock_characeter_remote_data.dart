@@ -163,6 +163,14 @@ class MockCharacterRemoteData extends Mock implements CharacterRemoteData {
     String? filterStringType,
   }) async {
     try {
+      filterStringType = filterStringType?.trim() ?? '';
+
+      if (filterStringType != '' &&
+          filterStringType != 'name' &&
+          filterStringType != 'species') {
+        return const Left(FailureModel(status: 500, message: 'Bad Filter'));
+      }
+
       List<CharacterModel> rta = [];
 
       for (var i = 0; i < 20; i++) {
