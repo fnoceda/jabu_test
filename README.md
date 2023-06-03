@@ -19,6 +19,6 @@ Además puede descargar la app-debug más arriba seleccionando la opción de Rel
         <th colspan="2">Coverage</th>
     </tr>
      <tr>
-        <td><img src="doc/coverage.png" width="400"></td>
+        <td colspan="2"><img src="doc/coverage.png" width="400"></td>
     </tr>
 </table>
