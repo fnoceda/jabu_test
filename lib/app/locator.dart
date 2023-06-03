@@ -13,7 +13,7 @@ import '../data/sources/remote_data/character_remote_data.dart';
 import '../domain/repository/character_repository.dart';
 
 class Locator {
-  const Locator._();
+  const Locator._(); // coverage:ignore-line
   static final sl = GetIt.instance;
 
   static setUpLocators() async {

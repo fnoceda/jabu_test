@@ -10,10 +10,14 @@ import '../presentation/widgets/cache_network_image_wrapper.dart';
 import 'locator.dart';
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+  final String? initialRoute;
+
+  const MyApp({super.key, this.initialRoute});
 
   @override
   Widget build(BuildContext context) {
+    print('initialRoute => $initialRoute');
+
     return MultiBlocProvider(
       providers: [
         BlocProvider(
@@ -37,7 +41,7 @@ class MyApp extends StatelessWidget {
           colorScheme: ColorScheme.fromSeed(seedColor: const Color(0xff62cffc)),
           useMaterial3: true,
         ),
-        initialRoute: '/',
+        initialRoute: initialRoute ?? '/',
         onGenerateRoute: AppNavigator.router.generator,
       ),
     );

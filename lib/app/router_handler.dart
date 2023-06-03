@@ -17,6 +17,6 @@ final Handler detailHandler = Handler(handlerFunc: (context, params) {
   }
 });
 
-final Handler pageNotFoundHandler = Handler(
-  handlerFunc: (context, params) => const NotFoundPage(),
-);
+final Handler pageNotFoundHandler = Handler(handlerFunc: (context, params) {
+  return const NotFoundPage();
+});

@@ -16,6 +16,7 @@ class SearchTypeWidget extends StatelessWidget {
       children: [
         const Text('Search By:   Name'),
         Radio<SearchType>(
+          key: const Key('SearchType.name'),
           value: SearchType.name,
           groupValue: context.watch<HomeCubitCubit>().state.searchType,
           onChanged: (SearchType? value) {
@@ -27,6 +28,7 @@ class SearchTypeWidget extends StatelessWidget {
         ),
         const Text('Species'),
         Radio<SearchType>(
+          key: const Key('SearchType.species'),
           // title: const Text('Species'),
           value: SearchType.species,
           groupValue: context.watch<HomeCubitCubit>().state.searchType,

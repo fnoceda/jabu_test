@@ -14,6 +14,7 @@ class SearchInput extends StatelessWidget {
     return Container(
       margin: const EdgeInsets.symmetric(horizontal: 30),
       child: TextFormField().withDebounce(
+          key: const Key('SearchKey'),
           decoration: const InputDecoration(
             hintText: 'Search...',
           ),
@@ -21,9 +22,8 @@ class SearchInput extends StatelessWidget {
           duration: const Duration(milliseconds: 800),
           onChanged: (String? value) {
             if (value != null) {
-              onChange(value);
-
               FocusScope.of(context).unfocus();
+              onChange(value);
             }
           }),
     );

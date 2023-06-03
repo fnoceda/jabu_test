@@ -20,7 +20,7 @@ void main() {
     bloc = HomeCubitCubit();
   });
 
-  group('HomeCubit Bloc Test', () {
+  group('HomeCubit Test > ', () {
     test('Init', () async {
       expect(bloc.state.dataStatusFilter, DataFilter.all);
       expect(bloc.state.searchType, SearchType.name);
@@ -36,6 +36,17 @@ void main() {
       expect(bloc.state.dataStatusFilter, DataFilter.all);
       bloc.changeDataStatusFilter(DataFilter.dead);
       expect(bloc.state.dataStatusFilter, DataFilter.dead);
+    });
+
+    test('changeSearchType', () async {
+      expect(bloc.state.searchType, SearchType.name);
+      bloc.changeSearchType(SearchType.species);
+      expect(bloc.state.searchType, SearchType.species);
+    });
+
+    test('HomeCubitState.toString', () async {
+      final text = bloc.state.toString();
+      expect(text.contains('HomeCubitState'), true);
     });
   });
 }

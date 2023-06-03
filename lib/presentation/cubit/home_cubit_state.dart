@@ -30,6 +30,6 @@ class HomeCubitState extends Equatable {
   @override
   List<Object> get props => [dataStatusFilter, searchType];
 
-  @override
-  bool get stringify => true;
+  // @override
+  // bool get stringify => true;
 }

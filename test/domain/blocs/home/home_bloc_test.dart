@@ -48,5 +48,16 @@ void main() {
       expectLater(bloc.state.requestStatus, RequestStatus.success);
       expectLater(bloc.state.characters.length, 20);
     });
+
+    test('changeFilters', () async {
+      expect(bloc.state.filterString, null);
+      expect(bloc.state.filterStringType, 'name');
+      await bloc.changeFilters(
+        filterString: 'Alien',
+        filterStringType: 'species',
+      );
+      expect(bloc.state.filterString, 'Alien');
+      expect(bloc.state.filterStringType, 'species');
+    });
   });
 }
