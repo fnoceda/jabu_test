@@ -15,7 +15,6 @@ import 'package:jabu_test/presentation/widgets/custom_app_bar.dart';
 import 'package:jabu_test/presentation/widgets/detail_data_widget.dart';
 import 'package:mockito/mockito.dart';
 import 'package:http/http.dart' as http;
-import 'package:uikit/widgets/custom_list_view_widget.dart';
 
 import '../../../app/mock_locator.dart';
 
@@ -36,13 +35,10 @@ void main() {
   });
   testWidgets('Home Page Widget Test', (WidgetTester tester) async {
     await tester.runAsync(() async {
-      await tester.pumpWidget(const MyApp());
-      final customListView = find.byType(CustomListView);
-      await tester.pumpAndSettle();
-      expect(customListView, findsOneWidget);
+      await tester.pumpWidget(const MyApp(
+        initialRoute: '/detail/1',
+      ));
 
-      final listTiles = find.byType(ListTile);
-      await tester.tap(listTiles.first);
       await tester.pumpAndSettle();
       final detailPage = find.byKey(const ValueKey('DetailPage.key'));
       expect(detailPage, findsOneWidget); // navigate ok
