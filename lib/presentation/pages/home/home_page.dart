@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:uikit/models/custom_list_tile_model.dart';
 
 import '../../../domain/blocs/home/home_bloc_bloc.dart';
 import '../../widgets/list_builder.dart';
@@ -43,7 +44,9 @@ class HomePage extends StatelessWidget {
               ),
               const SizedBox(height: 20),
               const StatusFilterWidget(),
-              const ListBuilder(),
+              ListBuilder(
+                loadMoreData: context.read<HomeBlocBloc>().getMoreData,
+              ),
             ],
           ),
         ),

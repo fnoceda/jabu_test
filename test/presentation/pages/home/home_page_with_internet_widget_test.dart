@@ -7,6 +7,7 @@
 
 import 'dart:io';
 
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:jabu_test/app/app.dart';
@@ -42,7 +43,7 @@ void main() {
       await tester.pumpWidget(const MyApp());
 
       final scafoldHome = find.byKey(const ValueKey('ScafoldHomePage.Key'));
-      final loadingText = find.byKey(const ValueKey('Loading.Key'));
+      final loadingText = find.byType(CupertinoActivityIndicator);
       final searchTypeWidget = find.byType(SearchTypeWidget);
       final searchInputWidget = find.byType(SearchInput);
       final statusFilterWidget = find.byType(StatusFilterWidget);

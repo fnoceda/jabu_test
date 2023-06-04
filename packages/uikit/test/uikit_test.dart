@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:uikit/uikit.dart';
 
-Future<List<CustomListTileModel>> getMoreData(BuildContext context) async {
+Future<List<CustomListTileModel>> getMoreData() async {
   await Future.delayed(const Duration(milliseconds: 1000));
   List<CustomListTileModel> result = [];
 
@@ -51,7 +51,7 @@ main() {
 }
 
 class TestWidget extends StatelessWidget {
-  final Future<List<CustomListTileModel>> Function(BuildContext)? loadMoreData;
+  final Future<List<CustomListTileModel>> Function()? loadMoreData;
 
   const TestWidget({super.key, this.loadMoreData});
 

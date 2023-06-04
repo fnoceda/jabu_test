@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:uikit/models/custom_list_tile_model.dart';
 import 'package:uikit/widgets/custom_list_view_widget.dart';
@@ -8,12 +8,10 @@ import '../../domain/blocs/home/home_bloc_bloc.dart';
 import '../../utils/enums.dart';
 
 class ListBuilder extends StatelessWidget {
-  const ListBuilder({super.key});
+  // final Future<List<CustomListTileModel>>  getMoreData;
+  final Future<List<CustomListTileModel>> Function()? loadMoreData;
 
-  Future<List<CustomListTileModel>> _getMoreData(BuildContext context) async {
-    var result = context.read<HomeBlocBloc>().getMoreData();
-    return result;
-  }
+  const ListBuilder({super.key, required this.loadMoreData});
 
   @override
   Widget build(BuildContext context) {
@@ -22,7 +20,7 @@ class ListBuilder extends StatelessWidget {
         switch (state.requestStatus) {
           case RequestStatus.none:
           case RequestStatus.loading:
-            return const Text(key: Key('Loading.Key'), 'Loading');
+            return const CupertinoActivityIndicator();
           case RequestStatus.error:
             return Text(
                 key: const Key('Error.Key'), state.errorMessage ?? 'Error');
@@ -31,7 +29,7 @@ class ListBuilder extends StatelessWidget {
             return Expanded(
               child: CustomListView(
                 initialData: state.listViewData,
-                loadMoreData: _getMoreData,
+                loadMoreData: loadMoreData,
                 onItemTap: (String id) {
                   AppNavigator.router.navigateTo(context, 'detail/$id');
                 },

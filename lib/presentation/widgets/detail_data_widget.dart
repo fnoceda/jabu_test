@@ -9,7 +9,6 @@ class DetailDataWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     return Container(
-      // color: Colors.grey,
       width: size.width * 0.9,
       margin: const EdgeInsets.symmetric(horizontal: 24),
       child: Column(

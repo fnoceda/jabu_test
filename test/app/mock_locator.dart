@@ -10,7 +10,7 @@ import 'package:mockito/mockito.dart';
 import '../data/sources/remote_data/mock_characeter_remote_data.dart';
 import '../data/sources/local_data/mock_character_local_data.dart';
 import '../data/services/mock_check_internet_services.dart';
-import '../presentation/widgets/cache_network_image_wrapper.dart';
+import '../presentation/widgets/mock_cache_network_image_wrapper.dart';
 
 class LocatorWithInternet extends Mock implements Locator {
   LocatorWithInternet._();

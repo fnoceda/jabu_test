@@ -7,7 +7,6 @@ class SearchInput extends StatelessWidget {
 
   const SearchInput(
       {super.key, required this.searchController, required this.onChange});
-  // final TextEditingController searchController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {

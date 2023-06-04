@@ -18,7 +18,9 @@ class DetailPage extends StatelessWidget {
       color: Colors.white,
       child: SafeArea(
         child: Scaffold(
-          appBar: const CustomAppBar(),
+          appBar: const CustomAppBar(
+            title: "Character Detail",
+          ),
           body: BlocBuilder<DetailBloc, DetailState>(
             builder: (context, state) {
               switch (state.fetchStatus) {
