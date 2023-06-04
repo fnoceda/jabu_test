@@ -5,7 +5,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:jabu_test/app/app.dart';
 import 'package:jabu_test/app/router.dart';
 
-import '../../app/mock_locator.dart';
+import '../../../app/mock_locator.dart';
 
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();

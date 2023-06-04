@@ -20,7 +20,7 @@ import 'package:mockito/mockito.dart';
 import 'package:http/http.dart' as http;
 import 'package:uikit/widgets/custom_list_view_widget.dart';
 
-import '../../app/mock_locator.dart';
+import '../../../app/mock_locator.dart';
 
 class MockHttpClient extends Mock implements http.Client {
   Future<http.Response> gets(dynamic uri, {dynamic headers}) {
