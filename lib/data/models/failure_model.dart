@@ -8,14 +8,15 @@ class FailureModel extends Equatable {
     required this.message,
   });
 
-  @override // coverage:ignore-line
+  @override // coverage:ignore-start
   List<Object> get props => [status, message];
 
-  @override // coverage:ignore-line
+  @override
   bool get stringify => true;
 
-  @override // coverage:ignore-line
+  @override
   String toString() {
     return "FailureModel(status: $status, message: $message )";
   }
+  // coverage:ignore-end
 }
