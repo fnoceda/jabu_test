@@ -21,19 +21,21 @@ class DetailPage extends StatelessWidget {
           appBar: const CustomAppBar(
             title: "Character Detail",
           ),
-          body: BlocBuilder<DetailBloc, DetailState>(
-            builder: (context, state) {
-              switch (state.fetchStatus) {
-                case FetchDataStatus.none:
-                  return const Center(child: Text('none...'));
-                case FetchDataStatus.fetching:
-                  return const Center(child: Text('loading...'));
-                case FetchDataStatus.fail:
-                  return Text(state.errorMessage ?? 'Error');
-                case FetchDataStatus.success:
-                  return DetailDataWidget(model: state.viewModel!);
-              }
-            },
+          body: SingleChildScrollView(
+            child: BlocBuilder<DetailBloc, DetailState>(
+              builder: (context, state) {
+                switch (state.fetchStatus) {
+                  case FetchDataStatus.none:
+                    return const Center(child: Text('none...'));
+                  case FetchDataStatus.fetching:
+                    return const Center(child: Text('loading...'));
+                  case FetchDataStatus.fail:
+                    return Text(state.errorMessage ?? 'Error');
+                  case FetchDataStatus.success:
+                    return DetailDataWidget(model: state.viewModel!);
+                }
+              },
+            ),
           ),
         ),
       ),

@@ -23,8 +23,9 @@ class HomePage extends StatelessWidget {
         appBar: AppBar(),
         body: Container(
           width: size.width * 0.9,
-          margin: const EdgeInsets.symmetric(horizontal: 16),
+          margin: EdgeInsets.symmetric(horizontal: size.width * 0.04),
           child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
             children: [
               SearchTypeWidget(
                 onChange: (String type) {
@@ -41,10 +42,11 @@ class HomePage extends StatelessWidget {
                       .changeFilters(filterString: text);
                 },
               ),
-              const SizedBox(height: 20),
+              SizedBox(height: size.width * 0.05),
               StatusFilterWidget(onChange: (String value) {
                 context.read<HomeBlocBloc>().changeFilters(filterStatus: value);
               }),
+              SizedBox(height: size.width * 0.05),
               ListBuilder(
                 loadMoreData: context.read<HomeBlocBloc>().getMoreData,
               ),

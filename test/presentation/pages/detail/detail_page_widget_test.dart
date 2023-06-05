@@ -27,30 +27,81 @@ class MockHttpClient extends Mock implements http.Client {
 
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
-  setUp(() {
+  setUpAll(() {
     AppNavigator.configureRoutes();
     LocatorWithInternet.setUpLocators();
     HttpOverrides.global = null;
     WidgetsFlutterBinding.ensureInitialized();
   });
-  testWidgets('Home Page Widget Test', (WidgetTester tester) async {
-    await tester.runAsync(() async {
-      await tester.pumpWidget(const MyApp(
-        initialRoute: '/detail/1',
-      ));
 
-      await tester.pumpAndSettle();
-      final detailPage = find.byKey(const ValueKey('DetailPage.key'));
-      expect(detailPage, findsOneWidget); // navigate ok
-      final appBar = find.byType(CustomAppBar);
-      final dataCard = find.byType(Card);
-      final detailData = find.byType(DetailDataWidget);
-      final avatar = find.byType(CircleAvatar);
+  group('Home Page Widget Test > ', () {
+    testWidgets('Normal Screen', (WidgetTester tester) async {
+      await tester.runAsync(() async {
+        await tester.pumpWidget(const MyApp(
+          initialRoute: '/detail/1',
+        ));
 
-      expect(appBar, findsOneWidget);
-      expect(detailData, findsOneWidget);
-      expect(avatar, findsOneWidget);
-      expect(dataCard, findsOneWidget);
+        await tester.pumpAndSettle();
+        final detailPage = find.byKey(const ValueKey('DetailPage.key'));
+        expect(detailPage, findsOneWidget); // navigate ok
+        final appBar = find.byType(CustomAppBar);
+        final dataCard = find.byType(Card);
+        final detailData = find.byType(DetailDataWidget);
+        final avatar = find.byType(CircleAvatar);
+
+        expect(appBar, findsOneWidget);
+        expect(detailData, findsOneWidget);
+        expect(avatar, findsOneWidget);
+        expect(dataCard, findsOneWidget);
+      });
+    });
+
+    testWidgets('300 x 400 Screen', (WidgetTester tester) async {
+      tester.view.physicalSize = const Size(300, 400);
+      addTearDown(tester.view.resetPhysicalSize);
+
+      await tester.runAsync(() async {
+        await tester.pumpWidget(const MyApp(
+          initialRoute: '/detail/1',
+        ));
+
+        await tester.pumpAndSettle();
+        final detailPage = find.byKey(const ValueKey('DetailPage.key'));
+        expect(detailPage, findsOneWidget); // navigate ok
+        final appBar = find.byType(CustomAppBar);
+        final dataCard = find.byType(Card);
+        final detailData = find.byType(DetailDataWidget);
+        final avatar = find.byType(CircleAvatar);
+
+        expect(appBar, findsOneWidget);
+        expect(detailData, findsOneWidget);
+        expect(avatar, findsOneWidget);
+        expect(dataCard, findsOneWidget);
+      });
+    });
+
+    testWidgets('400 x 300 Screen', (WidgetTester tester) async {
+      tester.view.physicalSize = const Size(400, 300);
+      addTearDown(tester.view.resetPhysicalSize);
+
+      await tester.runAsync(() async {
+        await tester.pumpWidget(const MyApp(
+          initialRoute: '/detail/1',
+        ));
+
+        await tester.pumpAndSettle();
+        final detailPage = find.byKey(const ValueKey('DetailPage.key'));
+        expect(detailPage, findsOneWidget); // navigate ok
+        final appBar = find.byType(CustomAppBar);
+        final dataCard = find.byType(Card);
+        final detailData = find.byType(DetailDataWidget);
+        final avatar = find.byType(CircleAvatar);
+
+        expect(appBar, findsOneWidget);
+        expect(detailData, findsOneWidget);
+        expect(avatar, findsOneWidget);
+        expect(dataCard, findsOneWidget);
+      });
     });
   });
 }

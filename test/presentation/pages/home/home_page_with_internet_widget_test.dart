@@ -65,8 +65,6 @@ void main() {
 
       expect(searchInput2, findsOneWidget);
 
-      // await Future.delayed(const Duration(milliseconds: 2000));
-      // await tester.pumpAndSettle();
       await tester.enterText(searchInput2, 'Rick');
       await tester.pump();
       await Future.delayed(const Duration(milliseconds: 1000));
@@ -88,18 +86,7 @@ void main() {
 
       final segmentedButton = find.byType(SegmentedButton<DataFilter>);
       expect(segmentedButton, findsOneWidget);
-      // final segmentedButtonW = tester.widget(segmentedButton);
 
-      //  expect(segmentedButtonW., true);
-
-      // final buttonSegmentList = find.byType(ButtonSegment);
-      // final buttonSegmentWL1 = tester.widget(buttonSegmentList.first);
-      // final buttonSegmentWL2 = tester.widget(buttonSegmentList.at(1));
-      // final buttonSegmentWL3 = tester.widget(buttonSegmentList.last);
-
-      // await tester.tap(buttonSegmentList.at(1));
-      // await tester.pumpAndSettle();
-      // expect(buttonSegmentWL2, matcher);
       //scroll
       final firstItem = find.text('Name 0');
       expect(firstItem, findsWidgets);

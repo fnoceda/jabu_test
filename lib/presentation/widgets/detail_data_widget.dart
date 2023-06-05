@@ -15,23 +15,32 @@ class DetailDataWidget extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          CircleAvatar(
-            backgroundColor: Colors.amber,
-            radius: 100,
-            child: model.image,
+          Container(
+            margin: const EdgeInsets.symmetric(vertical: 24),
+            child: CircleAvatar(
+              backgroundColor: Colors.amber,
+              radius: size.width * 0.24,
+              child: model.image,
+            ),
           ),
           Container(
-            margin: const EdgeInsets.only(top: 40),
+            margin: const EdgeInsets.only(top: 24),
+            padding: const EdgeInsets.only(top: 8),
             width: size.width * 0.9,
-            height: size.height * 0.2,
+            height: size.height * 0.15,
             child: Card(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text('Name: ${model.title}'),
-                  Text('Specie: ${model.subTitle}'),
-                  Text('Status: ${model.status}'),
-                ],
+              child: Center(
+                child: SingleChildScrollView(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Text('Name: ${model.title}'),
+                      Text('Specie: ${model.subTitle}'),
+                      Text('Status: ${model.status}'),
+                    ],
+                  ),
+                ),
               ),
             ),
           )

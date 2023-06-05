@@ -15,12 +15,15 @@ class ListBuilder extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    Size size = MediaQuery.of(context).size;
     return BlocBuilder<HomeBlocBloc, HomeBlocState>(
       builder: (context, state) {
         switch (state.requestStatus) {
           case RequestStatus.none:
           case RequestStatus.loading:
-            return const CupertinoActivityIndicator();
+            return CupertinoActivityIndicator(
+              radius: size.width * 0.1,
+            );
           case RequestStatus.error:
             return Text(
                 key: const Key('Error.Key'), state.errorMessage ?? 'Error');

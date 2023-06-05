@@ -61,8 +61,7 @@ class _CustomListViewState extends State<CustomListView> {
     Size size = MediaQuery.of(context).size;
     return Column(
       children: [
-        Flexible(
-          flex: 2,
+        Expanded(
           child: ListView.separated(
             controller: scrollController,
             primary: false,
@@ -82,8 +81,8 @@ class _CustomListViewState extends State<CustomListView> {
           child: Container(
             color: Colors.white,
             width: size.width * 0.9,
-            height: 100,
-            child: const CupertinoActivityIndicator(),
+            height: size.width * 0.2,
+            child: CupertinoActivityIndicator(radius: size.width * 0.05),
           ),
         )
       ],
