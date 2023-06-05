@@ -16,6 +16,8 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
 
+    print("width=> ${size.width} height=> ${size.height}");
+
     return Container(
       color: Colors.white,
       child: Scaffold(

@@ -38,70 +38,150 @@ void main() {
     HttpOverrides.global = null;
     WidgetsFlutterBinding.ensureInitialized();
   });
-  testWidgets('Home Page Widget Test', (WidgetTester tester) async {
-    await tester.runAsync(() async {
-      await tester.pumpWidget(const MyApp());
 
-      final scafoldHome = find.byKey(const ValueKey('ScafoldHomePage.Key'));
-      final loadingText = find.byType(CupertinoActivityIndicator);
-      final searchTypeWidget = find.byType(SearchTypeWidget);
-      final searchInputWidget = find.byType(SearchInput);
-      final statusFilterWidget = find.byType(StatusFilterWidget);
-      final listBuilder = find.byType(ListBuilder);
-      final customListView = find.byType(CustomListView);
+  group('Home Page Widget Test > ', () {
+    testWidgets('Normal Screen', (WidgetTester tester) async {
+      await tester.runAsync(() async {
+        await tester.pumpWidget(const MyApp());
 
-      expect(scafoldHome, findsOneWidget);
-      expect(loadingText, findsOneWidget);
-      expect(searchTypeWidget, findsOneWidget);
-      expect(searchInputWidget, findsOneWidget);
-      expect(statusFilterWidget, findsOneWidget);
-      expect(listBuilder, findsOneWidget);
-      await tester.pumpAndSettle();
+        final scafoldHome = find.byKey(const ValueKey('ScafoldHomePage.Key'));
+        final loadingText = find.byType(CupertinoActivityIndicator);
+        final searchTypeWidget = find.byType(SearchTypeWidget);
+        final searchInputWidget = find.byType(SearchInput);
+        final statusFilterWidget = find.byType(StatusFilterWidget);
+        final listBuilder = find.byType(ListBuilder);
+        final customListView = find.byType(CustomListView);
 
-      expect(customListView, findsOneWidget);
+        expect(scafoldHome, findsOneWidget);
+        expect(loadingText, findsOneWidget);
+        expect(searchTypeWidget, findsOneWidget);
+        expect(searchInputWidget, findsOneWidget);
+        expect(statusFilterWidget, findsOneWidget);
+        expect(listBuilder, findsOneWidget);
+        await tester.pumpAndSettle();
 
-      final searchInput2 = find.byKey(const Key('SearchKey'));
-      // print(searchInput2);
+        expect(customListView, findsOneWidget);
 
-      expect(searchInput2, findsOneWidget);
+        final searchInput2 = find.byKey(const Key('SearchKey'));
+        // print(searchInput2);
 
-      await tester.enterText(searchInput2, 'Rick');
-      await tester.pump();
-      await Future.delayed(const Duration(milliseconds: 1000));
-      await tester.pumpAndSettle();
+        expect(searchInput2, findsOneWidget);
 
-      expect(find.text('Rick'), findsOneWidget);
+        await tester.enterText(searchInput2, 'Rick');
+        await tester.pump();
+        await Future.delayed(const Duration(milliseconds: 1000));
+        await tester.pumpAndSettle();
 
-      final radio = find.byType(Radio<SearchType>);
-      await tester.tap(radio.last);
-      await tester.pumpAndSettle();
-      final radioWidgetSpecies = tester.widget<Radio<SearchType>>(radio.last);
-      await tester.pump();
-      expect(radioWidgetSpecies.groupValue, SearchType.species);
+        expect(find.text('Rick'), findsOneWidget);
 
-      await tester.tap(radio.first);
-      await tester.pumpAndSettle();
-      final radioWidgetName = tester.widget<Radio<SearchType>>(radio.first);
-      expect(radioWidgetName.groupValue, SearchType.name);
+        final radio = find.byType(Radio<SearchType>);
+        await tester.tap(radio.last);
+        await tester.pumpAndSettle();
+        final radioWidgetSpecies = tester.widget<Radio<SearchType>>(radio.last);
+        await tester.pump();
+        expect(radioWidgetSpecies.groupValue, SearchType.species);
 
-      final segmentedButton = find.byType(SegmentedButton<DataFilter>);
-      expect(segmentedButton, findsOneWidget);
+        await tester.tap(radio.first);
+        await tester.pumpAndSettle();
+        final radioWidgetName = tester.widget<Radio<SearchType>>(radio.first);
+        expect(radioWidgetName.groupValue, SearchType.name);
 
-      //scroll
-      final firstItem = find.text('Name 0');
-      expect(firstItem, findsWidgets);
-      await tester.drag(find.byType(ListView), const Offset(0.0, -10000));
-      await tester.pumpAndSettle();
-      final lastItem = find.text('Name 19');
-      expect(lastItem, findsWidgets);
-      await tester.pump(const Duration(milliseconds: 500));
+        final segmentedButton = find.byType(SegmentedButton<DataFilter>);
+        expect(segmentedButton, findsOneWidget);
 
-      // // navegacion
-      final listTiles = find.byType(ListTile);
-      await tester.tap(listTiles.last);
-      await tester.pumpAndSettle();
-      final detailPage = find.byKey(const ValueKey('DetailPage.key'));
-      expect(detailPage, findsOneWidget);
+        //scroll
+        final firstItem = find.text('Name 0');
+        expect(firstItem, findsWidgets);
+        await tester.drag(find.byType(ListView), const Offset(0.0, -10000));
+        await tester.pumpAndSettle();
+        final lastItem = find.text('Name 19');
+        expect(lastItem, findsWidgets);
+        await tester.pump(const Duration(milliseconds: 500));
+
+        // // navegacion
+        final listTiles = find.byType(ListTile);
+        await tester.tap(listTiles.last);
+        await tester.pumpAndSettle();
+        final detailPage = find.byKey(const ValueKey('DetailPage.key'));
+        expect(detailPage, findsOneWidget);
+      });
+    });
+
+    testWidgets('300 x 400 Screen', (WidgetTester tester) async {
+      tester.view.physicalSize = const Size(300, 400);
+      tester.view.devicePixelRatio = 1.0;
+      tester.view.viewInsets = FakeViewPadding.zero;
+      tester.view.viewPadding = FakeViewPadding.zero;
+      addTearDown(tester.view.resetPhysicalSize);
+      addTearDown(tester.view.resetDevicePixelRatio);
+      addTearDown(tester.view.resetViewInsets);
+      addTearDown(tester.view.resetViewPadding);
+
+      await tester.runAsync(() async {
+        await tester.pumpWidget(const MyApp());
+
+        final scafoldHome = find.byKey(const ValueKey('ScafoldHomePage.Key'));
+        final loadingText = find.byType(CupertinoActivityIndicator);
+        final searchTypeWidget = find.byType(SearchTypeWidget);
+        final searchInputWidget = find.byType(SearchInput);
+        final statusFilterWidget = find.byType(StatusFilterWidget);
+        final listBuilder = find.byType(ListBuilder);
+        final customListView = find.byType(CustomListView);
+
+        expect(scafoldHome, findsOneWidget);
+        expect(loadingText, findsOneWidget);
+        expect(searchTypeWidget, findsOneWidget);
+        expect(searchInputWidget, findsOneWidget);
+        expect(statusFilterWidget, findsOneWidget);
+        expect(listBuilder, findsOneWidget);
+        await tester.pumpAndSettle();
+
+        expect(customListView, findsOneWidget);
+
+        final searchInput2 = find.byKey(const Key('SearchKey'));
+        // print(searchInput2);
+
+        expect(searchInput2, findsOneWidget);
+
+        await tester.enterText(searchInput2, 'Rick');
+        await tester.pump();
+        await Future.delayed(const Duration(milliseconds: 1000));
+        await tester.pumpAndSettle();
+
+        expect(find.text('Rick'), findsOneWidget);
+
+        final radio = find.byType(Radio<SearchType>);
+        await tester.ensureVisible(radio.last);
+        await tester.tap(radio.last);
+        await tester.pumpAndSettle();
+        final radioWidgetSpecies = tester.widget<Radio<SearchType>>(radio.last);
+        await tester.pump();
+        expect(radioWidgetSpecies.groupValue, SearchType.species);
+
+        await tester.tap(radio.first);
+        await tester.pumpAndSettle();
+        final radioWidgetName = tester.widget<Radio<SearchType>>(radio.first);
+        expect(radioWidgetName.groupValue, SearchType.name);
+
+        final segmentedButton = find.byType(SegmentedButton<DataFilter>);
+        expect(segmentedButton, findsOneWidget);
+
+        // //scroll
+        final firstItem = find.text('Name 0');
+        expect(firstItem, findsWidgets);
+        await tester.drag(find.byType(ListView), const Offset(0.0, -10000));
+        await tester.pumpAndSettle();
+        final lastItem = find.text('Name 19');
+        expect(lastItem, findsWidgets);
+        await tester.pump(const Duration(milliseconds: 500));
+
+        // // // navegacion
+        final listTiles = find.byType(ListTile);
+        await tester.tap(listTiles.last);
+        await tester.pumpAndSettle();
+        final detailPage = find.byKey(const ValueKey('DetailPage.key'));
+        expect(detailPage, findsOneWidget);
+      });
     });
   });
 }

@@ -15,30 +15,33 @@ class SearchTypeWidget extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.center,
       mainAxisSize: MainAxisSize.min,
       children: [
-        const Text('Search By:   Name'),
-        Radio<SearchType>(
-          key: const Key('SearchType.name'),
-          value: SearchType.name,
-          groupValue: context.watch<HomeCubitCubit>().state.searchType,
-          onChanged: (SearchType? value) {
-            if (value != null) {
-              context.read<HomeCubitCubit>().changeSearchType(value);
-              onChange(value.name);
-            }
-          },
+        const Flexible(child: Text('Search By:   Name')),
+        Flexible(
+          child: Radio<SearchType>(
+            key: const Key('SearchType.name'),
+            value: SearchType.name,
+            groupValue: context.watch<HomeCubitCubit>().state.searchType,
+            onChanged: (SearchType? value) {
+              if (value != null) {
+                context.read<HomeCubitCubit>().changeSearchType(value);
+                onChange(value.name);
+              }
+            },
+          ),
         ),
-        const Text('Species'),
-        Radio<SearchType>(
-          key: const Key('SearchType.species'),
-          // title: const Text('Species'),
-          value: SearchType.species,
-          groupValue: context.watch<HomeCubitCubit>().state.searchType,
-          onChanged: (SearchType? value) {
-            if (value != null) {
-              context.read<HomeCubitCubit>().changeSearchType(value);
-              onChange(value.name);
-            }
-          },
+        const Flexible(child: Text('Species')),
+        Flexible(
+          child: Radio<SearchType>(
+            key: const Key('SearchType.species'),
+            value: SearchType.species,
+            groupValue: context.watch<HomeCubitCubit>().state.searchType,
+            onChanged: (SearchType? value) {
+              if (value != null) {
+                context.read<HomeCubitCubit>().changeSearchType(value);
+                onChange(value.name);
+              }
+            },
+          ),
         ),
       ],
     );

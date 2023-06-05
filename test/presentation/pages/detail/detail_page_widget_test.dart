@@ -58,7 +58,13 @@ void main() {
 
     testWidgets('300 x 400 Screen', (WidgetTester tester) async {
       tester.view.physicalSize = const Size(300, 400);
+      tester.view.devicePixelRatio = 1.0;
+      tester.view.viewInsets = FakeViewPadding.zero;
+      tester.view.viewPadding = FakeViewPadding.zero;
       addTearDown(tester.view.resetPhysicalSize);
+      addTearDown(tester.view.resetDevicePixelRatio);
+      addTearDown(tester.view.resetViewInsets);
+      addTearDown(tester.view.resetViewPadding);
 
       await tester.runAsync(() async {
         await tester.pumpWidget(const MyApp(
@@ -82,7 +88,13 @@ void main() {
 
     testWidgets('400 x 300 Screen', (WidgetTester tester) async {
       tester.view.physicalSize = const Size(400, 300);
+      tester.view.devicePixelRatio = 1.0;
+      tester.view.viewInsets = FakeViewPadding.zero;
+      tester.view.viewPadding = FakeViewPadding.zero;
       addTearDown(tester.view.resetPhysicalSize);
+      addTearDown(tester.view.resetDevicePixelRatio);
+      addTearDown(tester.view.resetViewInsets);
+      addTearDown(tester.view.resetViewPadding);
 
       await tester.runAsync(() async {
         await tester.pumpWidget(const MyApp(
