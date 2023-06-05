@@ -42,7 +42,9 @@ class HomePage extends StatelessWidget {
                 },
               ),
               const SizedBox(height: 20),
-              const StatusFilterWidget(),
+              StatusFilterWidget(onChange: (String value) {
+                context.read<HomeBlocBloc>().changeFilters(filterStatus: value);
+              }),
               ListBuilder(
                 loadMoreData: context.read<HomeBlocBloc>().getMoreData,
               ),
